@@ -31,5 +31,6 @@ public interface ProjectDAO {
 	public void updateSprint(ProjectSprintDTO projectSprintDTO) throws Exception;
 	public List<ProjectWorkDTO> selectListWorkinSprintList(long projectCd) throws Exception;
 	public void updateTodoCondition(ProjectWorkDTO projectWorkDTO) throws Exception;
+	public void updateProjectSetting(ProjectDTO projectDTO) throws Exception;
 	
 }

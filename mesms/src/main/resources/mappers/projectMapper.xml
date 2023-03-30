@@ -225,5 +225,15 @@
 				TODO_CONDITION=#{todoCondition}
 		WHERE
 				ID=#{id}
-	</update>	
+	</update>
+	
+	<update id="updateProjectSetting" parameterType="ProjectDTO">
+		UPDATE
+				PROJECT
+		SET
+				PROJECT_NM = #{projectNm},
+				MEMBER_ID = #{memberId}
+		WHERE
+				PROJECT_CD=#{projectCd}
+	</update>
 </mapper> 

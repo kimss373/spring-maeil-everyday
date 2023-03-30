@@ -68,14 +68,12 @@ public class ProjectController {
 		
 		mv.addObject("projectList", projectList);
 		
-		System.out.println(projectList);
 		
 		return mv;
 	}
 	
 	@GetMapping("/projectMain")
 	public ModelAndView projectMain(@RequestParam("projectCd") long projectCd, HttpServletRequest request) throws Exception {
-		
 		ModelAndView mv = new ModelAndView();
 		
 		HttpSession session = request.getSession();
@@ -306,4 +304,83 @@ public class ProjectController {
 		return "success";
 	}
 
+	@GetMapping("/chart")
+	public ModelAndView chart(@RequestParam("projectCd") long projectCd, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String memberId =  (String)session.getAttribute("memberId");
+		
+		if (!projectService.checkProjectMember(projectCd, memberId)) {
+			mv.setViewName("/main");
+			return mv;
+		}
+		
+		List<ProjectMemberDTO> projectMemberList = projectService.getProjectMemberList(projectCd);
+		List<Object> chartList = projectService.getChartList(projectCd);
+		ProjectDTO projectDTO = projectService.getProjectDTO(projectCd);
+		
+		mv.setViewName("/project/chart");
+		
+		mv.addObject("projectMemberList", projectMemberList);
+		mv.addObject("chartList", chartList);
+		mv.addObject("projectDTO", projectDTO);
+		mv.addObject("initial", projectDTO.getProjectNm().charAt(0));
+		return mv;
+	}
+	
+	@GetMapping("/projectSetting")
+	public ModelAndView projectSetting(@RequestParam("projectCd") long projectCd, HttpServletRequest request) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String memberId =  (String)session.getAttribute("memberId");
+		
+		if (!projectService.checkProjectMember(projectCd, memberId)) {
+			mv.setViewName("/main");
+			return mv;
+		}
+		
+		List<ProjectMemberDTO> projectMemberList = projectService.getProjectMemberList(projectCd);
+		ProjectDTO projectDTO = projectService.getProjectDTO(projectCd);
+		
+		mv.setViewName("/project/projectSetting");
+		
+		mv.addObject("projectMemberList", projectMemberList);
+		mv.addObject("projectDTO", projectDTO);
+		mv.addObject("memberId", memberId);
+		mv.addObject("initial", projectDTO.getProjectNm().charAt(0));
+		return mv;
+		
+	}
+	
+	@PostMapping("/projectSetting")
+	public ResponseEntity<Object> projectSetting(@ModelAttribute ProjectDTO projectDTO, HttpServletRequest request) throws Exception{
+		
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("memberId");
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		String jsScript = "<script>";
+		
+		if (!projectService.checkProjectMember(projectDTO.getProjectCd(), memberId)) {
+				jsScript += "alert('잘못된 접근!');";
+			   jsScript += "location.href='" + request.getContextPath() + "/main';";
+			   jsScript += "</script>";
+			
+			return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.FORBIDDEN);
+		}
+		
+		projectService.modifyProjectSetting(projectDTO);
+		
+		jsScript += "alert('프로젝트 설정 저장!');";
+		jsScript += "location.href='" + request.getContextPath() + "/project/projectMain?projectCd=" + projectDTO.getProjectCd() + "';";
+		jsScript += "</script>";
+		
+		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
+	}
+	
 }

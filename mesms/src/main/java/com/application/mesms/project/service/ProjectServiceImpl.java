@@ -210,6 +210,52 @@ public class ProjectServiceImpl implements ProjectService {
 		
 	}
 	
+	@Override
+	public List<Object> getChartList(long projectCd) throws Exception {
+		
+		List<ProjectWorkDTO> projectWorkList = projectDAO.selectListProjectWork(projectCd);
+		List<ProjectSprintDTO> projectSprintList = projectDAO.selectListProjectSprint(projectCd);
+		
+		List<Object> list = new ArrayList<Object>();
+		
+		for (int i = 0 ; i < projectSprintList.size() ; i++) {
+			
+			Map<String, Object> tmpMap = new HashMap<String, Object>();
+			ProjectSprintDTO projectSprintDTO = projectSprintList.get(i);
+			
+			tmpMap.put("sprintNm", projectSprintDTO.getNum() + " " + projectSprintDTO.getSprintNm());
+			tmpMap.put("TODO", 0);
+			tmpMap.put("inProgress", 0);
+			tmpMap.put("Done", 0);
+			tmpMap.put("total", 0);
+			
+			if (projectSprintDTO.getDone().equals("Y")) {
+				tmpMap.put("sprintDone", "완료된 스프린트");
+			}
+			
+			
+			for(int j = 0 ; j < projectWorkList.size() ; j++) {
+				
+				ProjectWorkDTO projectWorkDTO = projectWorkList.get(j);
+				
+				if (projectWorkDTO.getProjectSprintId() != projectSprintDTO.getId()) {
+					continue;
+				}
+				
+				tmpMap.put(projectWorkDTO.getTodoCondition(), Long.valueOf(String.valueOf(tmpMap.get(projectWorkDTO.getTodoCondition()))) + 1);
+				tmpMap.put("total", Long.valueOf(String.valueOf(tmpMap.get("total"))) + 1);
+			}
+			list.add(tmpMap);
+			
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void modifyProjectSetting(ProjectDTO projectDTO) throws Exception {
+		projectDAO.updateProjectSetting(projectDTO);
+	}
 	
 
 	

@@ -15,9 +15,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                            Dashboard
+                                            Maeil Everyday
                                         </h1>
-                                        <div class="page-header-subtitle">Example dashboard overview and content summary</div>
+                                        <div class="page-header-subtitle">매일매일 사용하는 일정관리 서비스</div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
                                         <button class="btn btn-white p-3" id="reportrange">
@@ -39,11 +39,10 @@
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 col-xxl-12">
                                                 <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                                                    <h1 class="text-primary">Welcome to SB Admin Pro!</h1>
-                                                    <p class="text-gray-700 mb-0">Browse our fully designed UI toolkit! Browse our prebuilt app pages, components, and utilites, and be sure to look at our full documentation!</p>
+                                                    <h1 class="text-primary">Welcome to Maeil Everyday!</h1>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="${contextPath }/resources/bootstrap/assets/img/illustrations/at-work.svg" style="max-width: 26rem" /></div>
+                                            <div class="col-xl-4 col-xxl-12 text-center"><!-- <img class="img-fluid" src="${contextPath }/thumbnails?profileImage=${sessionScope.profileImage }" style="max-width: 26rem" /> --></div>
                                         </div>
                                     </div>
                                 </div>

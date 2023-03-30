@@ -59,7 +59,8 @@
                         <nav class="nav nav-borders">
                             <a class="nav-link active" href="${contextPath }/project/projectBacklog?projectCd=${projectDTO.projectCd }">백로그</a>
                             <a class="nav-link" href="${contextPath }/project/projectMain?projectCd=${projectDTO.projectCd }">보드</a>
-                            <a class="nav-link ml-0" href="#">프로젝트 설정</a>
+                           	<a class="nav-link" href="${contextPath }/project/chart?projectCd=${projectDTO.projectCd }">그래프</a>
+                            <a class="nav-link ml-0" href="${contextPath }/project/projectSetting?projectCd=${projectDTO.projectCd }">프로젝트 설정</a>
                             <a class="nav-link" href="${contextPath }/project/inviteMember?projectCd=${projectDTO.projectCd }">초대하기</a>
                         </nav>
                         <hr class="mt-0 mb-4" />

@@ -27,5 +27,7 @@ public interface ProjectService {
 	public void modifySprint(ProjectSprintDTO projectSprintDTO) throws Exception;
 	public Map<String, Object> getProjectBoardMap(long projectCd) throws Exception;
 	public void changeTodoCondition(long id, String todoCondition) throws Exception;
+	public List<Object> getChartList(long projectCd) throws Exception;
+	public void modifyProjectSetting(ProjectDTO projectDTO) throws Exception;
 	
 }

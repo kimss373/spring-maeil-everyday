@@ -126,5 +126,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 		sqlSession.update("project.updateTodoCondition", projectWorkDTO);
 	}
 
+	@Override
+	public void updateProjectSetting(ProjectDTO projectDTO) throws Exception {
+		sqlSession.update("project.updateProjectSetting", projectDTO);
+	}
+
 	
 }
