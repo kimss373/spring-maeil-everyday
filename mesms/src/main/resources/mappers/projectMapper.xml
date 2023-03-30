@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project">
+	
+	<select id="checkDuplicateParticipationCd" parameterType="String" resultType="ProjectDTO">
+		SELECT
+				*
+		FROM
+				PROJECT
+		WHERE
+				PARTICIPATION_CD = #{generatedString}
+	</select>
+	
+	<insert id="insertNewProject" parameterType="ProjectDTO">
+		INSERT INTO
+				PROJECT(PROJECT_NM,
+						MEMBER_ID,
+						PARTICIPATION_CD)
+				VALUES(#{projectNm},
+						#{memberId},
+						#{participationCd})		
+	</insert>
+	
+	<select id="selectOneProjectDTOByParticipationCd" parameterType="String" resultType="ProjectDTO">
+		SELECT
+				*
+		FROM
+				PROJECT
+		WHERE
+				PARTICIPATION_CD = #{participationCd}
+	</select>
+	
+	<select id="selectOneProjectMemberDTOByMemberId" parameterType="hashMap" resultType="ProjectMemberDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_MEMBER
+		WHERE
+				PROJECT_CD = #{projectCd} and
+				MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertProjectMember" parameterType="hashmap">
+		INSERT INTO
+				PROJECT_MEMBER(PROJECT_CD,
+						MEMBER_ID)
+				VALUES(#{projectCd},
+						#{memberId})		
+	</insert>
+	
+	<select id="selectListProject" parameterType="String" resultType="ProjectDTO">
+	    SELECT
+				*
+		FROM
+				PROJECT
+		WHERE
+				PROJECT_CD in (	SELECT
+										PROJECT_CD
+								FROM   
+										PROJECT_MEMBER
+                                WHERE  
+                                		MEMBER_ID = #{memberId});
+	</select>
+	
+	<select id="selectOneProjectMember" parameterType="hashmap" resultType="ProjectMemberDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_MEMBER
+		WHERE
+				MEMBER_ID = #{memberId} and
+				PROJECT_CD = #{projectCd}
+	</select>
+	
+	<select id="selectListProjectMember" parameterType="long" resultType="ProjectMemberDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_MEMBER
+		WHERE
+				PROJECT_CD = #{projectCd}
+	</select>
+	
+	<select id="selectListProjectSprint" parameterType="long" resultType="ProjectSprintDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_SPRINT
+		WHERE
+				PROJECT_CD = #{projectCd}
+	</select>
+	
+	<select id="selectListProjectWork" parameterType="long" resultType="ProjectWorkDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_WORK
+		WHERE
+				PROJECT_CD = #{projectCd}
+	</select>
+	
+	<insert id="insertBacklog" parameterType="ProjectWorkDTO">
+		INSERT INTO
+				PROJECT_WORK(PROJECT_WORK_NUM,
+						PROJECT_CD,
+						ISSUE,
+						PROJECT_SPRINT_ID,
+						TODO_CONDITION,
+						RESPONSIBILITY)
+				VALUES(#{projectWorkNum},
+						#{projectCd},
+						#{issue},
+						-1,
+						'TODO',
+						#{responsibility})		
+	</insert>
+	
+	<select id="selectOneLargestNumInBacklog" parameterType="long" resultType="Long">
+		SELECT
+				PROJECT_WORK_NUM
+		FROM
+				PROJECT_WORK
+		WHERE
+				PROJECT_CD = #{projectCd}
+		ORDER BY
+				PROJECT_WORK_NUM DESC
+		LIMIT
+				1
+	</select>
+	
+	<select id="selectOneProjectDTOByProjectCd" parameterType="long" resultType="ProjectDTO">
+		SELECT
+				*
+		FROM
+				PROJECT
+		WHERE
+				PROJECT_CD = #{projectCd}
+	</select>
+	
+	<select id="selectOneLargestNumInSprint" parameterType="long" resultType="Long">
+		SELECT
+				NUM
+		FROM
+				PROJECT_SPRINT
+		WHERE
+				PROJECT_CD = #{projectCd}
+		ORDER BY
+				NUM DESC
+		LIMIT
+				1
+	</select>
+	
+	<insert id="insertSprint" parameterType="ProjectSprintDTO">
+		INSERT INTO
+				PROJECT_SPRINT(NUM,
+						PROJECT_CD,
+						SPRINT_NM,
+						DONE)
+				VALUES(#{num},
+						#{projectCd},
+						'스프린트',
+						'N')	
+	</insert>
+	
+	<select id="selectOneProjectWorkDTOById" parameterType="long" resultType="ProjectWorkDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_WORK
+		WHERE
+				ID = #{id}
+	</select>
+	
+	<update id="updateBacklog" parameterType="ProjectWorkDTO">
+		UPDATE
+				PROJECT_WORK
+		SET
+				ISSUE=#{issue},
+				PROJECT_SPRINT_ID=#{projectSprintId},
+				TODO_CONDITION=#{todoCondition},
+				RESPONSIBILITY=#{responsibility}
+		WHERE
+				ID=#{id}
+	</update>
+	
+	<select id="selectOneProjectSprintDTOById" parameterType="long" resultType="ProjectSprintDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_SPRINT
+		WHERE
+				ID = #{id}
+	</select>
+	
+	<update id="updateSprint" parameterType="ProjectSprintDTO">
+		UPDATE
+				PROJECT_SPRINT
+		SET
+				SPRINT_NM=#{sprintNm},
+				DONE=#{done}
+		WHERE
+				ID=#{id}
+	</update>
+	
+	<select id="selectListWorkinSprintList" parameterType="long" resultType="ProjectWorkDTO">
+		SELECT
+				*
+		FROM
+				PROJECT_WORK
+		WHERE
+				PROJECT_SPRINT_ID IN (SELECT
+											  ID
+									  FROM	
+											  PROJECT_SPRINT
+									  WHERE
+											  PROJECT_CD = #{projectCd} and
+											  DONE = 'N')
+	</select>
+	
+	<update id="updateTodoCondition" parameterType="ProjectWorkDTO">
+		UPDATE
+				PROJECT_WORK
+		SET
+				TODO_CONDITION=#{todoCondition}
+		WHERE
+				ID=#{id}
+	</update>	
+</mapper> 
