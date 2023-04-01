@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team">
+	
+	<insert id="insertNewTeam" parameterType="TeamDTO">
+		INSERT INTO
+				TEAM(TEAM_NM,
+						MEMBER_ID,
+						PARTICIPATION_CD,
+						TEAM_ANNOUNCEMENT,
+						TEAM_TARGET)
+				VALUES(#{teamNm},
+						#{memberId},
+						#{participationCd},
+						'',
+						'')		
+	</insert>
+	
+	<select id="selectOneTeamDTOByParticipationCd" parameterType="String" resultType="TeamDTO">
+		SELECT
+				*
+		FROM
+				TEAM
+		WHERE
+				PARTICIPATION_CD = #{participationCd}
+	</select>
+	
+	<select id="selectOneTeamMemberDTOByMemberId" parameterType="hashMap" resultType="TeamMemberDTO">
+		SELECT
+				*
+		FROM
+				TEAM_MEMBER
+		WHERE
+				TEAM_CD = #{teamCd} and
+				MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertTeamMember" parameterType="hashMap">
+		INSERT INTO
+				TEAM_MEMBER(TEAM_CD,
+						MEMBER_ID,
+						JOIN_DT)
+				VALUES(#{teamCd},
+						#{memberId},
+						NOW())
+	</insert>
+	
+	<select id="selectListTeam" parameterType="String" resultType="TeamDTO">
+		SELECT
+				*
+		FROM
+				TEAM
+		WHERE
+				TEAM_CD IN (SELECT
+									TEAM_CD
+							FROM   
+									TEAM_MEMBER
+	                        WHERE  
+	                               	MEMBER_ID = #{memberId})
+	</select>
+	
+	<select id="selectOneTeamMember" parameterType="hashmap" resultType="TeamMemberDTO">
+		SELECT
+				*
+		FROM
+				TEAM_MEMBER
+		WHERE
+				MEMBER_ID = #{memberId} and
+				TEAM_CD = #{teamCd}
+	</select>
+	
+	<select id="selectOneTeamDTOByTeamCd" parameterType="long" resultType="TeamDTO">
+		SELECT
+				*
+		FROM
+				TEAM
+		WHERE
+				TEAM_CD = #{teamCd}
+	</select>
+	
+	<select id="selectListTeamMember" parameterType="long" resultType="com.application.mesms.team.dto.TeamMemberWithProfileDTO">
+		SELECT
+				TEAM_MEMBER.*, PROFILE_IMAGE, MEMBER_NM
+		FROM
+				MEMBER
+		JOIN
+				TEAM_MEMBER
+		ON 
+				MEMBER.MEMBER_ID = TEAM_MEMBER.MEMBER_ID
+		WHERE
+				TEAM_CD = #{teamCd};
+	</select>
+	
+	<update id="updateTeamAnnouncement" parameterType="TeamDTO">
+		UPDATE
+				TEAM
+		SET
+				TEAM_ANNOUNCEMENT=#{teamAnnouncement}
+		WHERE
+				TEAM_CD=#{teamCd}
+	</update>
+	
+	<update id="updateTeamTarget" parameterType="TeamDTO">
+		UPDATE
+				TEAM
+		SET
+				TEAM_TARGET=#{teamTarget}
+		WHERE
+				TEAM_CD=#{teamCd}
+	</update>
+	
+	<delete id="deleteTeamMember" parameterType="TeamMemberDTO">
+		DELETE FROM
+				TEAM_MEMBER
+		WHERE
+				TEAM_CD=#{teamCd} and
+				MEMBER_ID = #{memberId}
+	</delete>
+	
+	<select id="selectListTeamLink" parameterType="long" resultType="TeamLinkDTO">
+		SELECT
+				*
+		FROM
+				TEAM_LINK
+		WHERE
+				TEAM_CD = #{teamCd}
+	</select>
+	
+</mapper> 

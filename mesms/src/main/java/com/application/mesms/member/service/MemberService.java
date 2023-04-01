@@ -13,5 +13,6 @@ public interface MemberService {
 	public MemberDTO getMemberDTOByMemberId(String memberId) throws Exception;
 	public void changeProfileImage(String uploadFileName, String memberId) throws Exception;
 	public void changeMyInfo(MemberDTO memberDTO) throws Exception;
+	public boolean checkValidity(String memberId) throws Exception;
 	
 }

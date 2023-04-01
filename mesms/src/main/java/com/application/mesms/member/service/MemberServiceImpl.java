@@ -80,6 +80,17 @@ public class MemberServiceImpl implements MemberService {
 	public void changeMyInfo(MemberDTO memberDTO) throws Exception {
 		memberDAO.updateMyInfo(memberDTO);		
 	}
+
+	@Override
+	public boolean checkValidity(String memberId) throws Exception {
+		boolean validity = false;
+		
+		if (memberDAO.selectOneDuplicatedId(memberId) != null) {
+			validity = true;
+		}
+		
+		return validity;
+	}
 	
 	
 	

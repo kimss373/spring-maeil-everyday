@@ -46,7 +46,7 @@
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (App Views)-->
-                            <div class="sidenav-menu-heading">App Views</div>
+                            <div class="sidenav-menu-heading">그룹 서비스</div>
                             <!-- Sidenav Accordion (Pages)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="nav-link-icon"><i data-feather="grid"></i></div>
@@ -63,21 +63,21 @@
                             <!-- Sidenav Accordion (Flows)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseFlows" aria-expanded="false" aria-controls="collapseFlows">
                                 <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-                                Flows
+                                팀
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseFlows" data-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Multi-Tenant Registration</a>
-                                    <a class="nav-link" href="#">Wizard</a>
+                                    <a class="nav-link" href="${contextPath }/team/teamList">나의 팀 목록</a>
+                                    <a class="nav-link" href="${contextPath }/team/createTeam">팀 만들기</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (UI Toolkit)-->
-                            <div class="sidenav-menu-heading">UI Toolkit</div>
+                            <div class="sidenav-menu-heading">개인 서비스</div>
                             <!-- Sidenav Accordion (Layout)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="nav-link-icon"><i data-feather="layout"></i></div>
-                                팀
+                                개인 일정
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">

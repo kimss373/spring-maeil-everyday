@@ -11,7 +11,7 @@ import com.application.mesms.project.dto.ProjectWorkDTO;
 public interface ProjectService {
 	
 	public String generateParticipationCd() throws Exception;
-	public boolean joinProjectMember(String participationCd, String memberId) throws Exception;
+	public int joinProjectOrTeamMember(String participationCd, String memberId) throws Exception;
 	public void createProject(String projectNm, String memberId) throws Exception;
 	public List<ProjectDTO> getProjectList(String memberId) throws Exception;
 	public boolean checkProjectMember(long projectCd, String memberId) throws Exception;

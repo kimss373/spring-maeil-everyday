@@ -7,10 +7,12 @@ import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
 import com.application.mesms.project.dto.ProjectWorkDTO;
+import com.application.mesms.team.dto.TeamDTO;
 
 public interface ProjectDAO {
 	
-	public boolean checkDuplicateParticipationCd(String generatedString) throws Exception;
+	public ProjectDTO checkDuplicateParticipationCd1(String generatedString) throws Exception;
+	public TeamDTO checkDuplicateParticipationCd2(String generatedString) throws Exception;
 	public void insertNewProject(ProjectDTO projectDTO) throws Exception;
 	public ProjectDTO selectOneProjectDTOByParticipationCd(String participationCd) throws Exception;
 	public ProjectMemberDTO selectOneProjectMemberDTOByMemberId(Map<String, Object> infoMap) throws Exception;

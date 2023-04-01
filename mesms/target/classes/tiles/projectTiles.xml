@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">	
+
+<tiles-definitions>
+
+	<definition name="/project/createProject" extends="baseLayout">
+		<put-attribute name="title" value="프로젝트 생성 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/createProject.jsp" />
+	</definition>
+	
+	<definition name="/project/projectList" extends="baseLayout">
+		<put-attribute name="title" value="내 프로젝트 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/projectList.jsp" />
+	</definition>
+	
+	<definition name="/project/projectMain" extends="baseLayout">
+		<put-attribute name="title" value="프로젝트 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/projectMain.jsp" />
+	</definition>
+	
+	<definition name="/project/projectBacklog" extends="baseLayout">
+		<put-attribute name="title" value="프로젝트 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/projectBacklog.jsp" />
+	</definition>
+	
+	<definition name="/project/joinProjectOrTeam" extends="baseLayout">
+		<put-attribute name="title" value="참가하기 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/joinProjectOrTeam.jsp" />
+	</definition>
+	
+	<definition name="/project/createBacklog" extends="pureLayout">
+		<put-attribute name="title" value="업무 생성 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/createBacklog.jsp" />
+	</definition>
+	
+	<definition name="/project/inviteMember" extends="baseLayout">
+		<put-attribute name="title" value="프로젝트 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/inviteMember.jsp" />
+	</definition>
+	
+	<definition name="/project/modifyBacklog" extends="pureLayout">
+		<put-attribute name="title" value="업무 수정 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/modifyBacklog.jsp" />
+	</definition>
+	
+	<definition name="/project/modifySprint" extends="pureLayout">
+		<put-attribute name="title" value="스프린트 수정 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/modifySprint.jsp" />
+	</definition>
+	
+	<definition name="/project/chart" extends="baseLayout">
+		<put-attribute name="title" value="프로젝트 그래프 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/projectChart.jsp" />
+	</definition>
+	
+	<definition name="/project/projectSetting" extends="baseLayout">
+		<put-attribute name="title" value="프로젝트 설정 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/project/projectSetting.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+</tiles-definitions>

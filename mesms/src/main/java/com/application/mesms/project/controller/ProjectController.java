@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -148,11 +149,17 @@ public class ProjectController {
 		
 		String jsScript = "<script>";
 		
-		if (projectService.joinProjectMember(participationCd, memberId)) {
+		int result = projectService.joinProjectOrTeamMember(participationCd, memberId);
+		
+		if (result == 1) {
 			   jsScript += "alert('가입 성공!');";
 			   jsScript += "location.href='" + request.getContextPath() + "/project/projectList';";
 			   jsScript += "</script>";
-		} 
+		} else if (result == 2) {
+				jsScript += "alert('가입 성공!');";
+			   jsScript += "location.href='" + request.getContextPath() + "/team/teamList';";
+			   jsScript += "</script>";
+		}
 		else {
 			   jsScript += "alert('이미 가입했거나 없는 초대코드입니다.');";
 			   jsScript += "history.go(-1);";

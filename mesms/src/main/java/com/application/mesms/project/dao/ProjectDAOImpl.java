@@ -11,6 +11,7 @@ import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
 import com.application.mesms.project.dto.ProjectWorkDTO;
+import com.application.mesms.team.dto.TeamDTO;
 
 @Repository
 public class ProjectDAOImpl implements ProjectDAO {
@@ -19,11 +20,17 @@ public class ProjectDAOImpl implements ProjectDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public boolean checkDuplicateParticipationCd(String generatedString) throws Exception {
+	public ProjectDTO checkDuplicateParticipationCd1(String generatedString) throws Exception {
 		
-		Object projectDTO = sqlSession.selectOne("project.checkDuplicateParticipationCd", generatedString);
-		if (projectDTO == null) return false;
-		else return true;
+		return sqlSession.selectOne("project.checkDuplicateParticipationCd1", generatedString);
+		
+	}
+	
+	@Override
+	public TeamDTO checkDuplicateParticipationCd2(String generatedString) throws Exception {
+		
+		return sqlSession.selectOne("project.checkDuplicateParticipationCd2", generatedString);
+		
 	}
 
 	@Override

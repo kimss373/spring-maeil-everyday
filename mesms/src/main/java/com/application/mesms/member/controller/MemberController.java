@@ -220,6 +220,22 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/thumbnailsSmall")
+	public void thumbnailsSmall(@RequestParam("profileImage") String profileImage, HttpServletResponse response) throws Exception{
+		
+		OutputStream out = response.getOutputStream();
+		String filePath = PROFILE_IMAGE_REPO_PATH + profileImage;
+		
+		File image = new File(filePath);
+		if(image.exists()) {
+			Thumbnails.of(image).size(45,45).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+		
+	}
+	
 	@GetMapping("/member/myInfo")
 	public ModelAndView myInfo(HttpServletRequest request) throws Exception{
 		

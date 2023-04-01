@@ -13,12 +13,18 @@ import com.application.mesms.project.dao.ProjectDAO;import com.application.mesms
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
 import com.application.mesms.project.dto.ProjectWorkDTO;
+import com.application.mesms.team.dao.TeamDAO;
+import com.application.mesms.team.dto.TeamDTO;
+import com.application.mesms.team.dto.TeamMemberDTO;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
 	private ProjectDAO projectDAO;
+	
+	@Autowired
+	private TeamDAO teamDAO;
 	
 	@Override
 	public String generateParticipationCd() throws Exception {
@@ -35,8 +41,10 @@ public class ProjectServiceImpl implements ProjectService {
 					.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 					.toString();
 			
-			if (!projectDAO.checkDuplicateParticipationCd(generatedString)) {
-				isDuplicated = false;
+			if (projectDAO.checkDuplicateParticipationCd1(generatedString) == null) {
+				if (projectDAO.checkDuplicateParticipationCd2(generatedString) == null) {
+					isDuplicated = false;
+				}
 			}
 			
 		}
@@ -45,11 +53,12 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public boolean joinProjectMember(String participationCd, String memberId) throws Exception{
+	public int joinProjectOrTeamMember(String participationCd, String memberId) throws Exception{
 		
-		boolean result = false;
+		int result = 0;
 		
 		ProjectDTO findProjectDTO = projectDAO.selectOneProjectDTOByParticipationCd(participationCd); // 만들어진 프로젝트의 CD 얻어오기
+		TeamDTO findTeamDTO = teamDAO.selectOneTeamDTOByParticipationCd(participationCd); // 만들어진 팀의 CD 얻어오기 
 		
 		if (findProjectDTO != null) {
 			
@@ -61,7 +70,18 @@ public class ProjectServiceImpl implements ProjectService {
 			if (projectMemberDTO == null) {
 				
 				projectDAO.insertProjectMember(infoMap);
-				result = true;
+				result = 1;
+			}
+		} else if (findTeamDTO != null) {
+			Map<String, Object> infoMap = new HashMap<String, Object>();
+			infoMap.put("teamCd", findTeamDTO.getTeamCd());
+			infoMap.put("memberId", memberId);
+			TeamMemberDTO teamMemberDTO = teamDAO.selectOneTeamMemberDTOByMemberId(infoMap);  // 이미 가입한 회원인지?
+			
+			if (teamMemberDTO == null) {
+				
+				teamDAO.insertTeamMember(infoMap);
+				result = 2;
 			}
 		}
 		
@@ -82,7 +102,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		projectDAO.insertNewProject(projectDTO);				// 새 프로젝트 인서트
 
-		joinProjectMember(generatedString, memberId);			// 프로젝트 멤버 인서트
+		joinProjectOrTeamMember(generatedString, memberId);			// 프로젝트 멤버 인서트
 		
 	}
 
