@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.application.mesms.team.dto.TeamBoardDTO;
 import com.application.mesms.team.dto.TeamDTO;
 import com.application.mesms.team.dto.TeamLinkDTO;
 import com.application.mesms.team.dto.TeamMemberDTO;
@@ -76,6 +77,46 @@ public class TeamDAOImpl implements TeamDAO {
 	@Override
 	public List<TeamLinkDTO> selectListTeamLink(long teamCd) throws Exception {
 		return sqlSession.selectList("team.selectListTeamLink", teamCd);
+	}
+
+	@Override
+	public void insertNewTeamLink(TeamLinkDTO teamLinkDTO) throws Exception {
+		sqlSession.insert("team.insertNewTeamLink", teamLinkDTO);
+	}
+
+	@Override
+	public List<TeamBoardDTO> selectListTeamBoard(long teamCd) throws Exception {
+		return sqlSession.selectList("team.selectListTeamBoard", teamCd);
+	}
+
+	@Override
+	public void insertNewTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception {
+		sqlSession.insert("team.insertNewTeamBoard", teamBoardDTO);
+	}
+	
+	@Override
+	public void updateTeamBoardReadCnt(long id) throws Exception {
+		sqlSession.update("team.updateTeamBoardReadCnt", id);
+	}
+
+	@Override
+	public TeamBoardDTO selectOneTeamBoardDTOById(long id) throws Exception {
+		return sqlSession.selectOne("team.selectOneTeamBoardDTOById", id);
+	}
+
+	@Override
+	public TeamBoardDTO selectOneTeamBoardDTOIsWriter(TeamBoardDTO teamBoardDTO) throws Exception {
+		return sqlSession.selectOne("team.selectOneTeamBoardDTOIsWriter", teamBoardDTO);
+	}
+
+	@Override
+	public void updateTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception {
+		sqlSession.update("team.updateTeamBoard", teamBoardDTO);
+	}
+
+	@Override
+	public void deleteTeamBoard(long id) throws Exception {
+		sqlSession.delete("team.deleteTeamBoard", id);
 	}
 
 }

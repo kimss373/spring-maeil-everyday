@@ -33,6 +33,12 @@
 		window.open(openUrl, 'pop', popOption);
 	}
 	
+	function createTeamLink(teamCd){
+		var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		var openUrl = "/team/createTeamLink?teamCd=" + teamCd;
+		window.open(openUrl, 'pop', popOption);
+	}
+	
 	function leaveTeam(){
 		
 		if (confirm("정말 탈퇴하시겠습니까??") == true){    //확인
@@ -44,11 +50,6 @@
 		     return false;
 
 		 }
-		
-		
-		
-		
-		
 		
 	}
 	
@@ -75,9 +76,7 @@
         <!-- Account page navigation-->
         <nav class="nav nav-borders">
             <a class="nav-link ml-0 active" href="${contextPath }/team/teamMain?teamCd=${teamDTO.teamCd }">메인</a>
-            <a class="nav-link" href="#">게시판</a>
-            <a class="nav-link" href="#">Security</a>
-            <a class="nav-link" href="#">Notifications</a>
+            <a class="nav-link" href="${contextPath }/team/teamBoard?teamCd=${teamDTO.teamCd }">게시판</a>
         </nav>
         <hr class="mt-0 mb-4" />
         <div class="row">
@@ -179,7 +178,7 @@
         <div class="card card-header-actions mb-4">
             <div class="card-header">
                 링크 공유
-                <button class="btn btn-sm btn-primary" type="button">링크 추가</button>
+                <button class="btn btn-sm btn-primary" type="button" onclick="createTeamLink(${teamDTO.teamCd})">링크 추가</button>
             </div>
             <div class="card-body">
             	<c:choose>
@@ -201,7 +200,7 @@
 			                    <div class="d-flex align-items-center">
 			                        <div class="ml-4">
 			                            <div class="small">${teamLinkDTO.content }</div>
-			                            <div class="text-xs text-muted">${teamLinkDTO.link }</div>
+			                            <div class="text-xs text-muted"><a href="${teamLinkDTO.link }" target="_blank">${teamLinkDTO.link }</a></div>
 			                        </div>
 			                    </div>
 			                    <div class="ml-4 small">

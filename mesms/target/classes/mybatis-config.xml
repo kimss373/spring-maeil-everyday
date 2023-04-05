@@ -16,6 +16,7 @@
 		<typeAlias type="com.application.mesms.team.dto.TeamDTO"	alias="TeamDTO" />
 		<typeAlias type="com.application.mesms.team.dto.TeamMemberDTO"	alias="TeamMemberDTO" />
 		<typeAlias type="com.application.mesms.team.dto.TeamLinkDTO"	alias="TeamLinkDTO" />
+		<typeAlias type="com.application.mesms.team.dto.TeamBoardDTO"	alias="TeamBoardDTO" />
 	</typeAliases>
 
 </configuration>

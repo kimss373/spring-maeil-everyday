@@ -30,7 +30,7 @@
                         <div class="card card-header-actions mb-4">
                             <div class="card-header">
                                 내 팀
-                                <button class="btn btn-sm btn-primary" type="button" onclick="location.href='${contextPath }/team/createTeam'">새 프로젝트 만들기</button>
+                                <button class="btn btn-sm btn-primary" type="button" onclick="location.href='${contextPath }/team/createTeam'">새 팀 만들기</button>
                             </div>
                             <div class="card-body">
                             	<c:choose>

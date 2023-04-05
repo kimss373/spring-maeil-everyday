@@ -10,6 +10,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/member/myInfo.jsp" />
 	</definition>
 	
+	<definition name="/myCalendar" extends="baseLayout">
+		<put-attribute name="title" value="일정 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/schedule/myCalendar.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

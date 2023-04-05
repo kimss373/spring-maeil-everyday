@@ -11,6 +11,7 @@ import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.service.ProjectService;
 import com.application.mesms.team.dao.TeamDAO;
+import com.application.mesms.team.dto.TeamBoardDTO;
 import com.application.mesms.team.dto.TeamDTO;
 import com.application.mesms.team.dto.TeamLinkDTO;
 import com.application.mesms.team.dto.TeamMemberDTO;
@@ -125,6 +126,133 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<TeamLinkDTO> getTeamLinkList(long teamCd) throws Exception {
 		return teamDAO.selectListTeamLink(teamCd);
+	}
+
+	@Override
+	public void createTeamLink(TeamLinkDTO teamLinkDTO) throws Exception {
+		teamDAO.insertNewTeamLink(teamLinkDTO);
+	}
+
+	@Override
+	public List<TeamBoardDTO> getTeamBoardList(long teamCd) throws Exception {
+		return teamDAO.selectListTeamBoard(teamCd);
+	}
+
+	@Override
+	public int createTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception {
+		
+		String title = teamBoardDTO.getTitle();
+		String content = teamBoardDTO.getContent();
+		
+		boolean titleAccept = false;
+		boolean contentAccept = false;
+		
+		if (title == null) {
+			return 1;
+		} else if (content == null) {
+			return 2;
+		}
+		
+		for (int i = 0 ; i < title.length() ; i++) {
+			if (title.charAt(i) != ' ') {
+				titleAccept = true;
+				break;
+			}
+		}
+		if (title.length() < 5) {
+			titleAccept = false;
+		}
+		
+		for (int i = 0 ; i < content.length() ; i++) {
+			if (content.charAt(i) != ' ') {
+				contentAccept = true;
+				break;
+			}
+		}
+		if (content.length() < 5) {
+			contentAccept = false;
+		}
+		
+		if (!titleAccept) {
+			return 1;
+		} else if (!contentAccept) {
+			return 2;
+		} else {
+			teamDAO.insertNewTeamBoard(teamBoardDTO);
+			return 3;
+		}
+		
+	}
+
+	@Override
+	public TeamBoardDTO getTeamBoardDetail(long id, boolean isReadCntUp) throws Exception {
+		if (isReadCntUp) {
+			teamDAO.updateTeamBoardReadCnt(id);
+		}
+		return teamDAO.selectOneTeamBoardDTOById(id);
+	}
+
+	@Override
+	public boolean isWriter(long id, String memberId) throws Exception {
+		TeamBoardDTO teamBoardDTO = new TeamBoardDTO();
+		teamBoardDTO.setId(id);
+		teamBoardDTO.setMemberId(memberId);
+		
+		if (teamDAO.selectOneTeamBoardDTOIsWriter(teamBoardDTO) == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public int modifyTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception {
+		
+		String title = teamBoardDTO.getTitle();
+		String content = teamBoardDTO.getContent();
+		
+		boolean titleAccept = false;
+		boolean contentAccept = false;
+		
+		if (title == null) {
+			return 1;
+		} else if (content == null) {
+			return 2;
+		}
+		
+		for (int i = 0 ; i < title.length() ; i++) {
+			if (title.charAt(i) != ' ' & title.charAt(i) != '　') {
+				titleAccept = true;
+				break;
+			}
+		}
+		if (title.length() < 5) {
+			titleAccept = false;
+		}
+		
+		for (int i = 0 ; i < content.length() ; i++) {
+			if (content.charAt(i) != ' ' & content.charAt(i) != '　') {
+				contentAccept = true;
+				break;
+			}
+		}
+		if (content.length() < 5) {
+			contentAccept = false;
+		}
+		
+		if (!titleAccept) {
+			return 1;
+		} else if (!contentAccept) {
+			return 2;
+		} else {
+			teamDAO.updateTeamBoard(teamBoardDTO);
+			return 3;
+		}
+	}
+
+	@Override
+	public void deleteTeamBoard(long id) throws Exception {
+		teamDAO.deleteTeamBoard(id);
 	}
 
 }

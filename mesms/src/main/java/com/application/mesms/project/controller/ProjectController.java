@@ -34,6 +34,9 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@GetMapping("/createProject")
 	public String createProject() {
 		return "/project/createProject";
@@ -44,14 +47,22 @@ public class ProjectController {
 		
 		HttpSession session = request.getSession();
 		
-		projectService.createProject(projectNm, (String)session.getAttribute("memberId"));
-		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
 		String jsScript = "<script>";
-			   jsScript += "location.href='" + request.getContextPath() + "/project/projectList';";
-			   jsScript += " </script>";
+		
+		String memberId = (String)session.getAttribute("memberId");
+		if (!memberService.checkValidity(memberId)) {
+			jsScript += "location.href='" + request.getContextPath() + "/main';";
+			jsScript += " </script>";
+			return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.FORBIDDEN);
+		}
+		
+		projectService.createProject(projectNm, memberId);
+		
+		jsScript += "location.href='" + request.getContextPath() + "/project/projectList';";
+		jsScript += " </script>";
 		
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
@@ -191,7 +202,15 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/createBacklog")
-	public String createBacklog(@ModelAttribute ProjectWorkDTO projectWorkDTO) throws Exception {
+	public String createBacklog(@ModelAttribute ProjectWorkDTO projectWorkDTO, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		String memberId = (String)session.getAttribute("memberId");
+		
+		if (!memberService.checkValidity(memberId)) {
+			return "autoClose";
+		}
 		
 		projectService.createBacklog(projectWorkDTO);
 		
@@ -258,8 +277,16 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/modifyBacklog")
-	public String modifyBacklog(@ModelAttribute ProjectWorkDTO projectWorkDTO) throws Exception {
+	public String modifyBacklog(@ModelAttribute ProjectWorkDTO projectWorkDTO, HttpServletRequest request ) throws Exception {
 		
+		HttpSession session = request.getSession();
+		
+		String memberId = (String)session.getAttribute("memberId");
+		
+		if (!memberService.checkValidity(memberId)) {
+			
+			return "autoClose";
+		}
 		projectService.modifyBacklog(projectWorkDTO);
 		
 		return "autoClose";

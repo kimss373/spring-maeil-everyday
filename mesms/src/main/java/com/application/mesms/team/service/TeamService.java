@@ -2,6 +2,7 @@ package com.application.mesms.team.service;
 
 import java.util.List;
 
+import com.application.mesms.team.dto.TeamBoardDTO;
 import com.application.mesms.team.dto.TeamDTO;
 import com.application.mesms.team.dto.TeamLinkDTO;
 import com.application.mesms.team.dto.TeamMemberDTO;
@@ -19,5 +20,12 @@ public interface TeamService {
 	public void modifyTeamTarget(TeamDTO teamDTO) throws Exception;
 	public boolean leaveTeam(long teamCd, String memberId) throws Exception;
 	public List<TeamLinkDTO> getTeamLinkList(long teamCd) throws Exception;
+	public void createTeamLink(TeamLinkDTO teamLinkDTO) throws Exception;
+	public List<TeamBoardDTO> getTeamBoardList(long teamCd) throws Exception;
+	public int createTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception;
+	public TeamBoardDTO getTeamBoardDetail(long id, boolean isReadCntUp) throws Exception;
+	public boolean isWriter(long id, String memberId) throws Exception;
+	public int modifyTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception;
+	public void deleteTeamBoard(long id) throws Exception;
 
 }

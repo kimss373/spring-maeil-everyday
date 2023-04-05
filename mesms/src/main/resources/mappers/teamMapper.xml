@@ -127,4 +127,86 @@
 				TEAM_CD = #{teamCd}
 	</select>
 	
+	<insert id="insertNewTeamLink" parameterType="TeamLinkDTO">
+		INSERT INTO
+				TEAM_LINK(TEAM_CD,
+						MEMBER_ID,
+						LINK,
+						CONTENT)
+				VALUES(#{teamCd},
+						#{memberId},
+						#{link},
+						#{content})
+	</insert>
+	
+	<select id="selectListTeamBoard" parameterType="long" resultType="TeamBoardDTO">
+		SELECT
+				*
+		FROM
+				TEAM_BOARD
+		WHERE
+				TEAM_CD = #{teamCd}
+	</select>
+	
+	<insert id="insertNewTeamBoard" parameterType="TeamBoardDTO">
+		INSERT INTO
+				TEAM_BOARD(TEAM_CD,
+						MEMBER_ID,
+						TITLE,
+						CONTENT,
+						READ_CNT,
+						CREATE_DT)
+				VALUES(#{teamCd},
+						#{memberId},
+						#{title},
+						#{content},
+						0,
+						NOW())
+	</insert>
+	
+	<update id="updateTeamBoardReadCnt" parameterType="long">
+		UPDATE
+				TEAM_BOARD
+		SET
+				READ_CNT = READ_CNT+1
+		WHERE
+				ID=#{id}
+	</update>
+	
+	<select id="selectOneTeamBoardDTOById" parameterType="long" resultType="TeamBoardDTO">
+		SELECT
+				*
+		FROM
+				TEAM_BOARD
+		WHERE
+				ID = #{id}
+	</select>
+	
+	<select id="selectOneTeamBoardDTOIsWriter" parameterType="TeamBoardDTO" resultType="TeamBoardDTO">
+		SELECT
+				*
+		FROM
+				TEAM_BOARD
+		WHERE
+				ID = #{id} and
+				MEMBER_ID = #{memberId}
+	</select>
+	
+	<update id="updateTeamBoard" parameterType="TeamBoardDTO">
+		UPDATE
+				TEAM_BOARD
+		SET
+				TITLE=#{title},
+				CONTENT=#{content}
+		WHERE
+				ID=#{id}
+	</update>
+	
+	<delete id="deleteTeamBoard" parameterType="long">
+		DELETE FROM
+				TEAM_BOARD
+		WHERE
+				ID=#{id}
+	</delete>
+	
 </mapper> 

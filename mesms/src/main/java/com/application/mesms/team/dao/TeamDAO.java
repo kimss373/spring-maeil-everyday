@@ -3,6 +3,7 @@ package com.application.mesms.team.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.application.mesms.team.dto.TeamBoardDTO;
 import com.application.mesms.team.dto.TeamDTO;
 import com.application.mesms.team.dto.TeamLinkDTO;
 import com.application.mesms.team.dto.TeamMemberDTO;
@@ -22,5 +23,13 @@ public interface TeamDAO {
 	public void updateTeamTarget(TeamDTO teamDTO) throws Exception;
 	public void deleteTeamMember(TeamMemberDTO teamMemberDTO) throws Exception;
 	public List<TeamLinkDTO> selectListTeamLink(long teamCd) throws Exception;
+	public void insertNewTeamLink(TeamLinkDTO teamLinkDTO) throws Exception;
+	public List<TeamBoardDTO> selectListTeamBoard(long teamCd) throws Exception;
+	public void insertNewTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception;
+	public void updateTeamBoardReadCnt(long id) throws Exception;
+	public TeamBoardDTO selectOneTeamBoardDTOById(long id) throws Exception;
+	public TeamBoardDTO selectOneTeamBoardDTOIsWriter(TeamBoardDTO teamBoardDTO) throws Exception;
+	public void updateTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception;
+	public void deleteTeamBoard(long id) throws Exception;
 	
 }
