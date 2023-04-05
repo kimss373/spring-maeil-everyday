@@ -310,20 +310,5 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("/myCalendar")
-	public ModelAndView myCalendar() {
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("/myCalendar");
-		return mv;
-		
-	}
-	
-	@GetMapping("/myCalendar/schedulePopup")
-	public String schedulePopup() {
-		
-		return "/tiles/bootstrap/contents/schedule/schedulePopup";
-	}
-	
 	
 }

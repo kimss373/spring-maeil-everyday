@@ -89,7 +89,7 @@
                                     </a>
                                     <div class="collapse" id="collapseLayoutSidenavVariations" data-parent="#accordionSidenavLayout">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${contextPath }/myCalendar">Static Sidenav</a>
+                                            <a class="nav-link" href="${contextPath }/mySchedule">Static Sidenav</a>
                                             <a class="nav-link" href="#">Dark Sidenav</a>
                                             <a class="nav-link" href="#">RTL Layout</a>
                                         </nav>

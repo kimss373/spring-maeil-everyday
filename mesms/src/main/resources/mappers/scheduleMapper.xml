@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="schedule">
+	
+	<insert id="insertNewSchedule" parameterType="ScheduleDTO">
+		INSERT INTO
+				SCHEDULE(TITLE,
+						START_DT,
+						END_DT,
+						MEMBER_ID,
+						MEMO)
+				VALUES(#{title},
+						#{startDt},
+						#{endDt},
+						#{memberId},
+						#{memo})		
+	</insert>
+	
+	<select id="selectListScheduleByMemberId" parameterType="String" resultType="ScheduleDTO">
+		SELECT
+				*
+		FROM
+				SCHEDULE
+		WHERE
+				MEMBER_ID = #{memberId}
+	</select>
+	
+</mapper> 

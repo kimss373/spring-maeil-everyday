@@ -139,24 +139,36 @@ $(function() {
        dayNamesMin: ['일','월','화','수','목','금','토'],
        dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']	
 	});
-	$("#startDate").datepicker();
-	$("#endDate").datepicker();
+	$("#startDt").datepicker();
+	$("#endDt").datepicker();
 	
-	$("#startDate").datepicker('setDate', 'today');
-	$("#endDate").datepicker('setDate', 'today');
+	$("#startDt").datepicker('setDate', 'today');
+	$("#endDt").datepicker('setDate', 'today');
 });
 
 $().ready(function() {
 	
-	console.log($("#startDate").val());
+	console.log($("#startDt").val());
 	
-	$("#startDate").change(function(){
+	$("#startDt").change(function(){
 		
 		console.log($(this).val());
 		console.log(typeof $(this).val());
 	});
 	
 });
+
+	function click_ok() {
+		
+		if (document.getElementById("title").value == "") {
+			alert("제목을 입력하세요");
+			return false;
+		}
+		document.scheduleData.submit();
+		return true;
+		
+	}
+	
 	
 </script>
 </head>
@@ -166,21 +178,21 @@ $().ready(function() {
 		<h1 class = "zTree-h1"> 일정 추가 </h1>
 	</div>
 	<div class = "group-body">
-	<form id = "scheduleData" action="add" method="post">
+	<form id = "scheduleData" name="scheduleData" action="/mySchedule/addSchedule" method="post">
 		<div class = "top">
-			<input class = "subject" id = "subject" type = "text" name = "subject" placeholder="제목을 입력해주세요">
+			<input class = "subject" id = "title" type = "text" name = "title" placeholder="일정을 입력해주세요">
 		</div>
 		<div class = "domain">
 			<h3 class = "zTree-h3"> 시작 </h3>
 		</div>
 		<div class = "domain">
-			<input class = "date" id = "startDate" type = "text" name = "startDate" id = "startDate">
+			<input class = "date" id = "startDt" type = "text" name = "startDt" id = "startDt">
 		</div>
 		<div class = "domain">
 			<h3 class = "zTree-h3"> 종료 </h3>
 		</div>
 		<div class = "domain">
-			<input class = "date" id = "endDate" type = "text" name = "endDate" id = "endDate">
+			<input class = "date" id = "endDt" type = "text" name = "endDt" id = "endDt">
 		</div>
 		<div class = "domain">
 			<h3 class = "zTree-h3"> 메모 </h3>
@@ -188,8 +200,8 @@ $().ready(function() {
 		<div class = "domain">
 			<textarea class = "memo" id = "memo" name = "memo" rows = "5" cols = "20" placeholder="100글자까지 입력 가능합니다"></textarea> 
 		</div>
-	</form>
 		<button class = "ok-button" type= "button" onclick="click_ok();">확인</button>
+	</form>
 	</div>	
 </div>
 </body>

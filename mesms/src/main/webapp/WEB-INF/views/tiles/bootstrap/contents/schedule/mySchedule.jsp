@@ -1,6 +1,12 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.application.mesms.schedule.dto.ScheduleDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%
+	List<ScheduleDTO> list = (ArrayList<ScheduleDTO>)request.getAttribute("scheduleList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +17,7 @@
 
 	function onSelectEvent(event) {
 		var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
-		var openUrl = "/myCalendar/schedulePopup";
+		var openUrl = "/mySchedule/schedulePopup";
 		window.open(openUrl, 'pop', popOption);
 	}
 
@@ -46,6 +52,21 @@
       editable: true,
       selectable: true,
       events: [
+    	  <%
+    	  	for (int i = 0 ; i < list.size() ; i++) {
+    	  		ScheduleDTO dto = (ScheduleDTO)list.get(i);
+    	  %>
+	    	  {
+	    		  title : '<%= dto.getTitle() %>',
+	    		  start : '<%= dto.getStartDt() %>',
+	    		  end : '<%= dto.getEndDt() %>',
+	    		  scheduleCd : '<%= dto.getScheduleCd() %>',
+	    		  memberId : '<%= dto.getMemberId() %>',
+	    		  memo : '<%= dto.getMemo() %>'
+	    	  },
+    	  <%
+    	  	}
+    	  %>
         {
           title: 'Business Lunch',
           start: '2023-01-03T13:00:00',
@@ -105,11 +126,18 @@
         }
       ],
       eventClick:function(event) {
+    	  
+      	 // var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+  		 // var openUrl = "/myCalendar/scheduleDetailPopup?";
+  		 // window.open(openUrl, 'pop', popOption);
+    	  console.log(event.event.extendedProps.memberId);
+    	  console.log(event.event.extendedProps.scheduleCd);
+    	  console.log(event.event.start);
     	  var startDay = event.event.start;
     	  var day = startDay.getDate();
     	  if (day < 10) day = '0' + day;
     	  var endDay = event.event.end;
-    	  var sd = startDay.getFullYear() + '-' + startDay.getMonth()+1 + '-' + day;
+    	  var sd = startDay.getFullYear() + '-' + (Number(startDay.getMonth())+1) + '-' + day;
           console.log(sd);
       }
     });
