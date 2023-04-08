@@ -180,13 +180,6 @@ public class MemberController {
 		return new ResponseEntity<Object>(message, responseHeaders, HttpStatus.OK);
 	}
 	
-	@GetMapping("/main")
-	public ModelAndView main() {
-		ModelAndView mv = new ModelAndView("/main");
-		
-		return mv;
-	}
-	
 	@GetMapping("/logout")
 	public ResponseEntity<Object> logout(HttpServletRequest request) throws Exception {
 		

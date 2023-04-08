@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	
+	function scheduleDetail(scheduleCd) {
+		
+		var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		var openUrl = "/mySchedule/scheduleDetail?scheduleCd=" + scheduleCd;
+		window.open(openUrl, 'pop', popOption);
+		
+	}
+	
+</script>
 </head>
 <body>
 			
@@ -151,7 +164,7 @@
                             <div class="col-xxl-4 col-xl-6 mb-4">
                                 <div class="card card-header-actions h-100">
                                     <div class="card-header">
-                                        Progress Tracker
+                                        일정 안내
                                         <div class="dropdown no-caret">
                                             <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
@@ -172,34 +185,30 @@
                                     </div>
                                     <div class="card-body">
                                         <h4 class="small">
-                                            Server Migration
-                                            <span class="float-right font-weight-bold">20%</span>
+                                            today
+                                            <span class="float-right font-weight-bold">${todayScheduleSize }개</span>
                                         </h4>
-                                        <div class="progress mb-4"><div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                        <hr>
+                                        <c:forEach var="todayScheduleDTO" items="${todayScheduleList }">
+	                                        <div>
+	                                        	<a href="#" onclick="scheduleDetail(${todayScheduleDTO.scheduleCd})">${todayScheduleDTO.title }  <span class="float-right small text-muted">${todayScheduleDTO.startDt } ~ ${todayScheduleDTO.endDt }</span></a>
+	                                        </div>
+                                        </c:forEach>
+                                        <hr>
                                         <h4 class="small">
-                                            Sales Tracking
-                                            <span class="float-right font-weight-bold">40%</span>
+                                            tomorrow
+                                            <span class="float-right font-weight-bold">${tomorrowScheduleSize }개</span>
                                         </h4>
-                                        <div class="progress mb-4"><div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div></div>
-                                        <h4 class="small">
-                                            Customer Database
-                                            <span class="float-right font-weight-bold">60%</span>
-                                        </h4>
-                                        <div class="progress mb-4"><div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div></div>
-                                        <h4 class="small">
-                                            Payout Details
-                                            <span class="float-right font-weight-bold">80%</span>
-                                        </h4>
-                                        <div class="progress mb-4"><div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div></div>
-                                        <h4 class="small">
-                                            Account Setup
-                                            <span class="float-right font-weight-bold">Complete!</span>
-                                        </h4>
-                                        <div class="progress"><div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                        <hr>
+                                        <c:forEach var="tomorrowScheduleDTO" items="${tomorrowScheduleList }">
+	                                        <div>
+	                                        	<a href="#" onclick="scheduleDetail(${tomorrowScheduleDTO.scheduleCd})">${tomorrowScheduleDTO.title }  <span class="float-right small text-muted">${tomorrowScheduleDTO.startDt } ~ ${tomorrowScheduleDTO.endDt }</span></a>
+	                                        </div>
+                                        </c:forEach>
                                     </div>
-                                    <a class="card-footer" href="#!">
+                                    <a class="card-footer" href="${contextPath }/mySchedule">
                                         <div class="d-flex align-items-center justify-content-between small text-body">
-                                            Visit Task Center
+                                            개인 일정으로 이동
                                             <i data-feather="arrow-right"></i>
                                         </div>
                                     </a>

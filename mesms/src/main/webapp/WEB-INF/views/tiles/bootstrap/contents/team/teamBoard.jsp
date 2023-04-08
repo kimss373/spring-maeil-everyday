@@ -34,15 +34,15 @@
         <hr class="mt-0 mb-4" />
         
         <!-- Billing history card-->
-        <div class="card card-header-actions mb-4">
+        <div class="card mb-4">
             <div class="card-header">
             	게시물 개수 - ${boardCnt }
             	<button class="btn btn-sm btn-primary" type="button" onclick="location.href='/team/createTeamBoard?teamCd=${teamDTO.teamCd}';">새 글 쓰기</button>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body">
                 <!-- Billing history table-->
-                <div class="table-responsive table-billing-history">
-                    <table class="table mb-0">
+                <div class="datatable">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th scope="col">제목</th>
@@ -51,6 +51,14 @@
                                 <th scope="col">작성일</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">제목</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">조회수</th>
+                                <th scope="col">작성일</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                         	<c:forEach var="teamBoardDTO" items="${teamBoardList }">
                         		<c:set var="ymd" value="${teamBoardDTO.createDt }" />

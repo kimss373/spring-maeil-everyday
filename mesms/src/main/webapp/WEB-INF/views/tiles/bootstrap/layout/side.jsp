@@ -62,7 +62,7 @@
                             </div>
                             <!-- Sidenav Accordion (Flows)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseFlows" aria-expanded="false" aria-controls="collapseFlows">
-                                <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+                                <div class="nav-link-icon"><i class="fas fa-users" data-feather="repeat" ></i></div>
                                 팀
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -75,66 +75,13 @@
                             <!-- Sidenav Heading (UI Toolkit)-->
                             <div class="sidenav-menu-heading">개인 서비스</div>
                             <!-- Sidenav Accordion (Layout)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="nav-link-icon"><i data-feather="layout"></i></div>
+                            <a class="nav-link" href="${contextPath }/mySchedule">
+                                <div class="nav-link-icon"><i class="fas fa-calendar"></i></div>
                                 개인 일정
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
-                                    <!-- Nested Sidenav Accordion (Layout -> Navigation)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseLayoutSidenavVariations" aria-expanded="false" aria-controls="collapseLayoutSidenavVariations">
-                                        Navigation
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutSidenavVariations" data-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${contextPath }/mySchedule">Static Sidenav</a>
-                                            <a class="nav-link" href="#">Dark Sidenav</a>
-                                            <a class="nav-link" href="#">RTL Layout</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Layout -> Container Options)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseLayoutContainers" aria-expanded="false" aria-controls="collapseLayoutContainers">
-                                        Container Options
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutContainers" data-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Boxed Layout</a>
-                                            <a class="nav-link" href="#">Fluid Layout</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Layout -> Page Headers)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseLayoutsPageHeaders" aria-expanded="false" aria-controls="collapseLayoutsPageHeaders">
-                                        Page Headers
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutsPageHeaders" data-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Simplified</a>
-                                            <a class="nav-link" href="#">Compact</a>
-                                            <a class="nav-link" href="#">Content Overlap</a>
-                                            <a class="nav-link" href="#">Breadcrumbs</a>
-                                            <a class="nav-link" href="#">Light</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Layout -> Starter Layouts)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseLayoutsStarterTemplates" aria-expanded="false" aria-controls="collapseLayoutsStarterTemplates">
-                                        Starter Layouts
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutsStarterTemplates" data-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Default</a>
-                                            <a class="nav-link" href="#">Minimal</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
                             <!-- Sidenav Accordion (Components)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
-                                <div class="nav-link-icon"><i data-feather="package"></i></div>
+                                <div class="nav-link-icon"><i class="fas fa-bell" data-feather="package"></i></div>
                                 메일 알람 서비스
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>

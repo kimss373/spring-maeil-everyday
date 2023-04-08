@@ -26,4 +26,50 @@
 				MEMBER_ID = #{memberId}
 	</select>
 	
+	<select id="ScheduleDTOByScheduleCd" parameterType="long" resultType="ScheduleDTO">
+		SELECT
+				*
+		FROM
+				SCHEDULE
+		WHERE
+				SCHEDULE_CD=#{scheduleCd}
+	</select>
+	
+	<update id="updateSchedule" parameterType="ScheduleDTO">
+		UPDATE
+				SCHEDULE
+		SET
+				TITLE=#{title},
+				START_DT=#{startDt},
+				END_DT=#{endDt},
+				MEMO=#{memo}
+		WHERE
+				SCHEDULE_CD=#{scheduleCd}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="ScheduleDTO">
+		DELETE FROM
+				SCHEDULE
+		WHERE
+				SCHEDULE_CD=#{scheduleCd}
+	</delete>
+	
+	<select id="selectListTodaySchedule" parameterType="String" resultType="ScheduleDTO">
+		SELECT
+				*
+		FROM
+				SCHEDULE
+		WHERE
+				CURDATE() BETWEEN STR_TO_DATE(START_DT, '%Y-%m-%d') and STR_TO_DATE(END_DT, '%Y-%m-%d');
+	</select>
+	
+	<select id="selectListTomorrowSchedule" parameterType="String" resultType="ScheduleDTO">
+		SELECT
+				*
+		FROM
+				SCHEDULE
+		WHERE
+				CURDATE()+1 BETWEEN STR_TO_DATE(START_DT, '%Y-%m-%d') and STR_TO_DATE(END_DT, '%Y-%m-%d');
+	</select>
+	
 </mapper> 

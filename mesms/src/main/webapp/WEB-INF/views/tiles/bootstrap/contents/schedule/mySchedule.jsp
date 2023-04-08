@@ -139,6 +139,10 @@
     	  var endDay = event.event.end;
     	  var sd = startDay.getFullYear() + '-' + (Number(startDay.getMonth())+1) + '-' + day;
           console.log(sd);
+          
+          var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+  		  var openUrl = "/mySchedule/scheduleDetail?scheduleCd=" + event.event.extendedProps.scheduleCd;
+  		  window.open(openUrl, 'pop', popOption);
       }
     });
 
