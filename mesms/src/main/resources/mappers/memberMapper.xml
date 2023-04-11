@@ -108,5 +108,23 @@
 				MEMBER_ID = #{memberId}
 	</update>
 	
+	<update id="updateMeSubscriptionY" parameterType="String">
+		UPDATE
+				MEMBER
+		SET
+				ME_SUBSCRIPTION_YN = 'Y'
+		WHERE
+				MEMBER_ID = #{memberId}
+	</update>
+	
+	<update id="updateMeSubscriptionN" parameterType="String">
+		UPDATE
+				MEMBER
+		SET
+				ME_SUBSCRIPTION_YN = 'N'
+		WHERE
+				MEMBER_ID = #{memberId}
+	</update>
+	
 	
 </mapper> 

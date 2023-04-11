@@ -3,6 +3,7 @@ package com.application.mesms.project.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.application.mesms.project.dto.PojectWorkWithProjectNmDTO;
 import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
@@ -34,5 +35,6 @@ public interface ProjectDAO {
 	public List<ProjectWorkDTO> selectListWorkinSprintList(long projectCd) throws Exception;
 	public void updateTodoCondition(ProjectWorkDTO projectWorkDTO) throws Exception;
 	public void updateProjectSetting(ProjectDTO projectDTO) throws Exception;
+	public List<PojectWorkWithProjectNmDTO> selectListMyProjectWork(String memberId) throws Exception;
 	
 }

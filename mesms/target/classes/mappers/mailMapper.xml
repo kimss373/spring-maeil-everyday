@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mail">
+	
+	<insert id="insertNewSubscription" parameterType="TokenWithMailDTO">
+		INSERT INTO
+				TOKEN_WITH_MAIL(MEMBER_ID,
+								ACCESS_TOKEN,
+								REFRESH_TOKEN,
+								EMAIL_ADDRESS,
+								LAST_MAIL_ID)
+						VALUES( #{memberId},
+								#{accessToken},
+								#{refreshToken},
+								#{emailAddress},
+								#{lastMailId})
+	</insert>
+	
+	<select id="selectListAll" resultType="TokenWithMailDTO">
+		SELECT
+				*
+		FROM
+				TOKEN_WITH_MAIL
+	</select>
+	
+	<update id="updateAccessToken" parameterType="TokenWithMailDTO">
+		UPDATE
+				TOKEN_WITH_MAIL
+		SET
+				ACCESS_TOKEN=#{accessToken}
+		WHERE
+				MEMBER_ID=#{memberId}
+	</update>
+	
+	<insert id="insertNewKeyword" parameterType="KeywordDTO">
+		INSERT INTO
+				KEYWORD(MEMBER_ID,
+						EMAIL_ADDRESS,
+						KEYWORD1,
+						KEYWORD2,
+						KEYWORD3)
+				VALUES (#{memberId},
+						#{emailAddress},
+						'',
+						'',
+						'')
+	</insert>
+	
+	<select id="selectOneKeywordDTO" parameterType="String" resultType="KeywordDTO">
+		SELECT
+				*
+		FROM
+				KEYWORD
+		WHERE
+				MEMBER_ID = #{memberId}
+	</select>
+	
+	<update id="updateKeyword" parameterType="hashMap">
+		UPDATE 
+				KEYWORD
+		SET
+				<if test='where == 1'>
+					KEYWORD1 = #{keyword}
+				</if>
+				<if test='where == 2'>
+					KEYWORD2 = #{keyword}
+				</if>
+				<if test='where == 3'>
+					KEYWORD3 = #{keyword}
+				</if>
+		WHERE
+				MEMBER_ID = #{memberId}
+	</update>
+	
+	<delete id="deleteKeyword" parameterType="String">
+		DELETE FROM
+				KEYWORD
+		WHERE
+				MEMBER_ID = #{memberId}
+	</delete>
+	
+	<delete id="deleteSubscription" parameterType="String">
+		DELETE FROM
+				TOKEN_WITH_MAIL
+		WHERE
+				MEMBER_ID = #{memberId}
+	</delete>
+	
+	<select id="selectOneTokenWithMail" parameterType="String" resultType="TokenWithMailDTO">
+		SELECT
+				*
+		FROM	
+				TOKEN_WITH_MAIL
+		WHERE
+				MEMBER_ID = #{memberId}
+	</select>
+	
+</mapper> 

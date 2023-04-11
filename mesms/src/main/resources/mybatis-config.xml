@@ -18,6 +18,8 @@
 		<typeAlias type="com.application.mesms.team.dto.TeamLinkDTO"	alias="TeamLinkDTO" />
 		<typeAlias type="com.application.mesms.team.dto.TeamBoardDTO"	alias="TeamBoardDTO" />
 		<typeAlias type="com.application.mesms.schedule.dto.ScheduleDTO"	alias="ScheduleDTO" />
+		<typeAlias type="com.application.mesms.mail.dto.TokenWithMailDTO"	alias="TokenWithMailDTO" />
+		<typeAlias type="com.application.mesms.mail.dto.KeywordDTO"	alias="KeywordDTO" />
 	</typeAliases>
 
 </configuration>

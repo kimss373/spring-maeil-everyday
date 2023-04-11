@@ -55,6 +55,7 @@
                         <div class="card-header">
                         	<span style="display: inline-block; width: 95%; text-align: left;"><button class="btn btn-sm btn-primary" type="button" onclick="location.href='/team/teamBoard?teamCd=${teamBoardDTO.teamCd}';">목록으로</button></span>
                         	
+                        	<c:if test="${sessionScope.memberId eq teamBoardDTO.memberId }">
                         	<form action="/team/deleteTeamBoard" name="deleteBoard" method="post">
 	                        	<span style="display: inline-block; width: 95%; text-align: right;"><button class="btn btn-sm btn-primary" type="button" onclick="location.href='/team/modifyTeamBoard?id=${teamBoardDTO.id}';">수정</button>
 	                        	<button class="btn btn-sm btn-primary" type="button" onclick="deleteTeamBoard();">삭제</button>
@@ -62,6 +63,7 @@
                         	<input type="hidden" name="id" value="${teamBoardDTO.id }">
                         	<input type="hidden" name="teamCd" value="${teamBoardDTO.teamCd }">
                         	</form>
+                        	</c:if>
                         </div>
                         <div class="card-body">
                             <!-- Component Preview-->

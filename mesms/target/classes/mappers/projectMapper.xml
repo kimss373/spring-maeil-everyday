@@ -245,4 +245,18 @@
 		WHERE
 				PROJECT_CD=#{projectCd}
 	</update>
+	
+	<select id="selectListMyProjectWork" parameterType="String" resultType="com.application.mesms.project.dto.PojectWorkWithProjectNmDTO">
+		SELECT
+				PROJECT_WORK.*, PROJECT.PROJECT_NM
+		FROM
+				PROJECT_WORK
+		JOIN
+				PROJECT
+		ON
+				PROJECT_WORK.PROJECT_CD = PROJECT.PROJECT_CD
+		WHERE
+				RESPONSIBILITY=#{memberId}
+	</select>
+	
 </mapper> 

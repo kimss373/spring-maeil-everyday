@@ -57,4 +57,14 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("member.updateMyInfo", memberDTO);
 	}
 
+	@Override
+	public void updateMeSubscriptionY(String memberId) throws Exception {
+		sqlSession.update("member.updateMeSubscriptionY", memberId);
+	}
+
+	@Override
+	public void updateMeSubscriptionN(String memberId) throws Exception {
+		sqlSession.update("member.updateMeSubscriptionN", memberId);
+	}
+
 }

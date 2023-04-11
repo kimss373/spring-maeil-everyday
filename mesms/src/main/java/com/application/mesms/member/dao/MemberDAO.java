@@ -13,5 +13,7 @@ public interface MemberDAO {
 	public MemberDTO selectOneMemberDTOByMemberId(String memberId) throws Exception;
 	public void updateProfileImage(MemberDTO memberDTO) throws Exception;
 	public void updateMyInfo(MemberDTO memberDTO) throws Exception;
+    public void updateMeSubscriptionY(String memberId) throws Exception;
+    public void updateMeSubscriptionN(String memberId) throws Exception;
 	
 }

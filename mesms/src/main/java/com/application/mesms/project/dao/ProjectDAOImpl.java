@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.application.mesms.project.dto.PojectWorkWithProjectNmDTO;
 import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
@@ -136,6 +137,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public void updateProjectSetting(ProjectDTO projectDTO) throws Exception {
 		sqlSession.update("project.updateProjectSetting", projectDTO);
+	}
+
+	@Override
+	public List<PojectWorkWithProjectNmDTO> selectListMyProjectWork(String memberId) throws Exception {
+		return sqlSession.selectList("project.selectListMyProjectWork", memberId);
 	}
 
 	

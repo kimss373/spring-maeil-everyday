@@ -3,6 +3,7 @@ package com.application.mesms.project.service;
 import java.util.List;
 import java.util.Map;
 
+import com.application.mesms.project.dto.PojectWorkWithProjectNmDTO;
 import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
@@ -29,5 +30,6 @@ public interface ProjectService {
 	public void changeTodoCondition(long id, String todoCondition) throws Exception;
 	public List<Object> getChartList(long projectCd) throws Exception;
 	public void modifyProjectSetting(ProjectDTO projectDTO) throws Exception;
+	public List<PojectWorkWithProjectNmDTO> getMyProjectWorkList(String memberId) throws Exception;
 	
 }

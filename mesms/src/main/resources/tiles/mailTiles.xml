@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">	
+
+<tiles-definitions>
+
+	<definition name="/mailAlarmServiceJoin" extends="baseLayout">
+		<put-attribute name="title" value="메일 알람 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/mail/mailAlarmServiceJoin.jsp" />
+	</definition>
+	
+	<definition name="/mailAlarmServiceMain" extends="baseLayout">
+		<put-attribute name="title" value="메일 알람 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/mail/mailAlarmServiceMain.jsp" />
+	</definition>
+	
+	<definition name="/mailAlarmService/modifyKeyword" extends="pureLayout">
+		<put-attribute name="title" value="키워드 변경 - Maeil Everyday" />
+		<put-attribute name="content" value="/WEB-INF/views/tiles/bootstrap/contents/mail/modifyKeyword.jsp" />
+	</definition>
+	
+</tiles-definitions>

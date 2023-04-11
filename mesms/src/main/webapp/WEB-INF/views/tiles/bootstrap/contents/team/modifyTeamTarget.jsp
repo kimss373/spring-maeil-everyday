@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>목표</title>
+<title>목표 변경</title>
 </head>
 <body>
 <main>
@@ -30,7 +30,7 @@
 	            <div class="col-xl-8">
 	                <!-- Account details card-->
 	                <div class="card mb-4">
-	                    <div class="card-header">목표 변경</div>
+	                    <div class="card-header">목표 설정</div>
 	                    <div class="card-body">
 	                        <form action="${contextPath }/team/modifyTeamTarget" method="post">
 	                            <!-- Form Group (memberNm)-->

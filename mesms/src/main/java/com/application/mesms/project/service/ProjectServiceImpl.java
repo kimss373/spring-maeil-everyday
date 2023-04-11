@@ -9,7 +9,9 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.application.mesms.project.dao.ProjectDAO;import com.application.mesms.project.dto.ProjectDTO;
+import com.application.mesms.project.dao.ProjectDAO;
+import com.application.mesms.project.dto.PojectWorkWithProjectNmDTO;
+import com.application.mesms.project.dto.ProjectDTO;
 import com.application.mesms.project.dto.ProjectMemberDTO;
 import com.application.mesms.project.dto.ProjectSprintDTO;
 import com.application.mesms.project.dto.ProjectWorkDTO;
@@ -275,6 +277,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void modifyProjectSetting(ProjectDTO projectDTO) throws Exception {
 		projectDAO.updateProjectSetting(projectDTO);
+	}
+
+	@Override
+	public List<PojectWorkWithProjectNmDTO> getMyProjectWorkList(String memberId) throws Exception {
+		return projectDAO.selectListMyProjectWork(memberId);
 	}
 	
 

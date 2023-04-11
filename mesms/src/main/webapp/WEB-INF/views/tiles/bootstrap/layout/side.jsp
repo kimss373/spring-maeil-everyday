@@ -80,35 +80,10 @@
                                 개인 일정
                             </a>
                             <!-- Sidenav Accordion (Components)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
-                                <div class="nav-link-icon"><i class="fas fa-bell" data-feather="package"></i></div>
+                            <a class="nav-link" href="${contextPath }/mailAlarmService">
+                                <div class="nav-link-icon"><i class="fas fa-bell"></i></div>
                                 메일 알람 서비스
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseComponents" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Alerts</a>
-                                    <a class="nav-link" href="#">Avatars</a>
-                                    <a class="nav-link" href="#">Badges</a>
-                                    <a class="nav-link" href="#">Buttons</a>
-                                    <a class="nav-link" href="#">
-                                        Cards
-                                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
-                                    </a>
-                                    <a class="nav-link" href="#">Dropdowns</a>
-                                    <a class="nav-link" href="#">
-                                        Forms
-                                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
-                                    </a>
-                                    <a class="nav-link" href="#">Modals</a>
-                                    <a class="nav-link" href="#">Navigation</a>
-                                    <a class="nav-link" href="#">Progress</a>
-                                    <a class="nav-link" href="#">Step</a>
-                                    <a class="nav-link" href="#">Timeline</a>
-                                    <a class="nav-link" href="#">Toasts</a>
-                                    <a class="nav-link" href="#">Tooltips</a>
-                                </nav>
-                            </div>
                             <!-- Sidenav Accordion (Utilities)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
                                 <div class="nav-link-icon"><i data-feather="tool"></i></div>
