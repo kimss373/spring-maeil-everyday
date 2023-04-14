@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,7 @@
                             <div class="col-xxl-4 col-xl-6 mb-4">
                                 <div class="card card-header-actions h-100">
                                     <div class="card-header">
-                                        Recent Activity
+                                        메일 알람
                                         <div class="dropdown no-caret">
                                             <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
@@ -79,86 +80,22 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="timeline timeline-xs">
-                                            <!-- Timeline Item 1-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">27 min</div>
-                                                    <div class="timeline-item-marker-indicator bg-green"></div>
-                                                </div>
-                                                <div class="timeline-item-content">
-                                                    New order placed!
-                                                    <a class="font-weight-bold text-dark" href="#!">Order #2912</a>
-                                                    has been successfully placed.
-                                                </div>
-                                            </div>
-                                            <!-- Timeline Item 2-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">58 min</div>
-                                                    <div class="timeline-item-marker-indicator bg-blue"></div>
-                                                </div>
-                                                <div class="timeline-item-content">
-                                                    Your
-                                                    <a class="font-weight-bold text-dark" href="#!">weekly report</a>
-                                                    has been generated and is ready to view.
-                                                </div>
-                                            </div>
-                                            <!-- Timeline Item 3-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">2 hrs</div>
-                                                    <div class="timeline-item-marker-indicator bg-purple"></div>
-                                                </div>
-                                                <div class="timeline-item-content">
-                                                    New user
-                                                    <a class="font-weight-bold text-dark" href="#!">Valerie Luna</a>
-                                                    has registered
-                                                </div>
-                                            </div>
-                                            <!-- Timeline Item 4-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">1 day</div>
-                                                    <div class="timeline-item-marker-indicator bg-yellow"></div>
-                                                </div>
-                                                <div class="timeline-item-content">Server activity monitor alert</div>
-                                            </div>
-                                            <!-- Timeline Item 5-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">1 day</div>
-                                                    <div class="timeline-item-marker-indicator bg-green"></div>
-                                                </div>
-                                                <div class="timeline-item-content">
-                                                    New order placed!
-                                                    <a class="font-weight-bold text-dark" href="#!">Order #2911</a>
-                                                    has been successfully placed.
-                                                </div>
-                                            </div>
-                                            <!-- Timeline Item 6-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">1 day</div>
-                                                    <div class="timeline-item-marker-indicator bg-purple"></div>
-                                                </div>
-                                                <div class="timeline-item-content">
-                                                    Details for
-                                                    <a class="font-weight-bold text-dark" href="#!">Marketing and Planning Meeting</a>
-                                                    have been updated.
-                                                </div>
-                                            </div>
-                                            <!-- Timeline Item 7-->
-                                            <div class="timeline-item">
-                                                <div class="timeline-item-marker">
-                                                    <div class="timeline-item-marker-text">2 days</div>
-                                                    <div class="timeline-item-marker-indicator bg-green"></div>
-                                                </div>
-                                                <div class="timeline-item-content">
-                                                    New order placed!
-                                                    <a class="font-weight-bold text-dark" href="#!">Order #2910</a>
-                                                    has been successfully placed.
-                                                </div>
-                                            </div>
+                                        	<c:forEach var="mailHistoryDTO" items="${mailHistoryList }">
+                                        		<c:set var="ymd" value="${mailHistoryDTO.historyDt }" />	
+                                        		<!-- Timeline Item -->
+	                                            <div class="timeline-item">
+	                                                <div class="timeline-item-marker">
+	                                                    <div class="timeline-item-marker-text"><fmt:formatDate value="${ymd}" pattern="MM-dd" /></div>
+	                                                    <div class="timeline-item-marker-indicator bg-green"></div>
+	                                                </div>
+	                                                <div class="timeline-item-content">
+	                                                    설정한 키워드
+	                                                    <a class="font-weight-bold text-dark" href="${contextPath }/mailAlarmService">${mailHistoryDTO.keyword }</a>
+	                                                    메일 발견!
+	                                                </div>
+	                                            </div>
+                                        	</c:forEach>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -224,14 +161,14 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="mr-3">
-                                                <div class="text-white-75 small">Earnings (Monthly)</div>
-                                                <div class="text-lg font-weight-bold">$40,000</div>
+                                                <div class="text-white-75 small"></div>
+                                                <div class="text-lg font-weight-bold"></div>
                                             </div>
                                             <i class="feather-xl text-white-50" data-feather="calendar"></i>
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Report</a>
+                                        <a class="small text-white stretched-link" href="#">View </a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -241,14 +178,14 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="mr-3">
-                                                <div class="text-white-75 small">Earnings (Annual)</div>
-                                                <div class="text-lg font-weight-bold">$215,000</div>
+                                                <div class="text-white-75 small"></div>
+                                                <div class="text-lg font-weight-bold"></div>
                                             </div>
                                             <i class="feather-xl text-white-50" data-feather="dollar-sign"></i>
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Report</a>
+                                        <a class="small text-white stretched-link" href="#">View </a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -258,8 +195,8 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="mr-3">
-                                                <div class="text-white-75 small">Task Completion</div>
-                                                <div class="text-lg font-weight-bold">24</div>
+                                                <div class="text-white-75 small">진행중인 업무</div>
+                                                <div class="text-lg font-weight-bold">2</div>
                                             </div>
                                             <i class="feather-xl text-white-50" data-feather="check-square"></i>
                                         </div>
@@ -275,14 +212,14 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="mr-3">
-                                                <div class="text-white-75 small">Pending Requests</div>
+                                                <div class="text-white-75 small">완료한 업무</div>
                                                 <div class="text-lg font-weight-bold">17</div>
                                             </div>
                                             <i class="feather-xl text-white-50" data-feather="message-circle"></i>
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Requests</a>
+                                        <a class="small text-white stretched-link" href="#">View Tasks</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

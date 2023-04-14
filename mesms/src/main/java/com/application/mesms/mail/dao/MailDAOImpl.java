@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.mesms.mail.dto.KeywordDTO;
+import com.application.mesms.mail.dto.MailHistoryDTO;
 import com.application.mesms.mail.dto.TokenWithMailDTO;
 
 @Repository
@@ -59,6 +60,21 @@ public class MailDAOImpl implements MailDAO {
 	@Override
 	public TokenWithMailDTO selectOneTokenWithMail(String memberId) throws Exception {
 		return sqlSession.selectOne("mail.selectOneTokenWithMail", memberId);
+	}
+
+	@Override
+	public void insertNewHistory(MailHistoryDTO mailHistoryDTO) throws Exception {
+		sqlSession.insert("mail.insertNewHistory", mailHistoryDTO);
+	}
+
+	@Override
+	public void updateLastMailId(TokenWithMailDTO setTokenWithMailDTO) throws Exception {
+		sqlSession.update("mail.updateLastMailId", setTokenWithMailDTO);
+	}
+
+	@Override
+	public List<MailHistoryDTO> selectListMailHistory(String memberId) throws Exception {
+		return sqlSession.selectList("mail.selectListMailHistory", memberId);
 	}
 	
 }

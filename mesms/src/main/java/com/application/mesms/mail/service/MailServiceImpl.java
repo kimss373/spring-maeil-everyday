@@ -1,5 +1,6 @@
 package com.application.mesms.mail.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +8,9 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,10 +25,12 @@ import org.springframework.web.client.RestTemplate;
 import com.application.mesms.mail.dao.MailDAO;
 import com.application.mesms.mail.dto.KeywordDTO;
 import com.application.mesms.mail.dto.MailDTO;
+import com.application.mesms.mail.dto.MailHistoryDTO;
 import com.application.mesms.mail.dto.MessageDTO;
 import com.application.mesms.mail.dto.MessageListDTO;
 import com.application.mesms.mail.dto.TokenDTO;
 import com.application.mesms.mail.dto.TokenWithMailDTO;
+import com.application.mesms.mail.thread.MailThread;
 import com.application.mesms.member.dao.MemberDAO;
 
 @Service
@@ -44,6 +47,9 @@ public class MailServiceImpl implements MailService {
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+    private ApplicationContext context;
 	
 	@Override
 	public boolean validateMember(String memberId) throws Exception {
@@ -150,6 +156,7 @@ public class MailServiceImpl implements MailService {
 			
 			HttpEntity entity = new HttpEntity(headers);
 	        ResponseEntity<MessageListDTO> messageListResponse = restTemplate.exchange(messageListUrl, HttpMethod.GET, entity, MessageListDTO.class);
+	        KeywordDTO keywordDTO = getKeywordDTO(tokenWithMailDTO.getMemberId());
 	        
 	        for (MessageDTO messageDTO : messageListResponse.getBody().getMessages()) {
 	        	
@@ -166,9 +173,23 @@ public class MailServiceImpl implements MailService {
 		        for (int i = 0 ; i < jArray.size() ; i++) {
 		        	JSONObject tmp = (JSONObject) parser.parse(jArray.get(i).toString());
 		        	if (tmp.get("name").equals("Subject")) {
-		        		System.out.println(i);
-		        		System.out.println(tmp.get("value"));
-		        		System.out.println("ㅋㅋ".toUpperCase());
+		        		String value = tmp.get("value").toString();
+		        		if (!keywordDTO.getKeyword1().equals("") && value.contains(keywordDTO.getKeyword1())) {
+		        			System.out.println("------------------------------");
+		        			System.out.println("설정한 키워드 : " + keywordDTO.getKeyword1());
+		        			System.out.println(value);
+		        			System.out.println("------------------------------");
+		        		} else if (!keywordDTO.getKeyword2().equals("") && value.contains(keywordDTO.getKeyword2())) {
+		        			System.out.println("------------------------------");
+		        			System.out.println("설정한 키워드 : " + keywordDTO.getKeyword2());
+		        			System.out.println(value);
+		        			System.out.println("------------------------------");
+		        		} else if (!keywordDTO.getKeyword3().equals("") && value.contains(keywordDTO.getKeyword3())) {
+		        			System.out.println("------------------------------");
+		        			System.out.println("설정한 키워드 : " + keywordDTO.getKeyword3());
+		        			System.out.println(value);
+		        			System.out.println("------------------------------");
+		        		}
 		        	}
 		        }
 			}
@@ -179,7 +200,85 @@ public class MailServiceImpl implements MailService {
 		
 	}
 	
-	private String getNewAccessToken(String refresh_token) {
+	@Override
+	public void test2() throws Exception {
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		List<TokenWithMailDTO> tokenWithMailList = mailDAO.selectListAll();
+		
+		List<TokenWithMailDTO> tokenWithMailList1 = new ArrayList<TokenWithMailDTO>();
+		List<TokenWithMailDTO> tokenWithMailList2 = new ArrayList<TokenWithMailDTO>();
+		
+		tokenWithMailList1.add(tokenWithMailList.get(0));
+		tokenWithMailList2.add(tokenWithMailList.get(1));
+		
+		MailThread mailThread = (MailThread) context.getBean(MailThread.class, tokenWithMailList1, clientId, clientSecret);
+		mailThread.start();
+		mailThread = (MailThread) context.getBean(MailThread.class, tokenWithMailList2, clientId, clientSecret);
+		mailThread.start();
+//		
+		
+//		for (TokenWithMailDTO tokenWithMailDTO : tokenWithMailList) {
+//			
+//			String messageListUrl = "https://gmail.googleapis.com/gmail/v1/users/" + tokenWithMailDTO.getEmailAddress() + "/messages?q=is:unread&maxResults=30";
+//			
+//			String access_token = getNewAccessToken(tokenWithMailDTO.getRefreshToken());
+//			tokenWithMailDTO.setAccessToken(access_token);
+//			
+//			mailDAO.updateAccessToken(tokenWithMailDTO);
+//			
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add("Authorization", "Bearer " + access_token);
+//			
+//			HttpEntity entity = new HttpEntity(headers);
+//	        ResponseEntity<MessageListDTO> messageListResponse = restTemplate.exchange(messageListUrl, HttpMethod.GET, entity, MessageListDTO.class);
+//	        KeywordDTO keywordDTO = getKeywordDTO(tokenWithMailDTO.getMemberId());
+//	        
+//	        for (MessageDTO messageDTO : messageListResponse.getBody().getMessages()) {
+//	        	
+//	        	if (messageDTO.getId().equals(tokenWithMailDTO.getLastMailId())) {
+//	        		break;
+//	        	}
+//				
+//	        	ResponseEntity<JSONObject> xString = restTemplate.exchange("https://gmail.googleapis.com/gmail/v1/users/" + tokenWithMailDTO.getEmailAddress() + "/messages/" + messageDTO.getId() + "?fields=payload(headers)", HttpMethod.GET, entity, JSONObject.class);
+//	        	JSONParser parser = new JSONParser();
+//	        	System.out.println(xString);
+		        //JSONObject jsonHeaders = (JSONObject) parser.parse(xString.getBody());
+//		        JSONArray jArray = (JSONArray) jsonHeaders.get("headers");
+//		        
+//		        for (int i = 0 ; i < jArray.size() ; i++) {
+//		        	JSONObject tmp = (JSONObject) parser.parse(jArray.get(i).toString());
+//		        	if (tmp.get("name").equals("Subject")) {
+//		        		String value = tmp.get("value").toString();
+//		        		if (!keywordDTO.getKeyword1().equals("") && value.contains(keywordDTO.getKeyword1())) {
+//		        			System.out.println("------------------------------");
+//		        			System.out.println("설정한 키워드 : " + keywordDTO.getKeyword1());
+//		        			System.out.println(value);
+//		        			System.out.println("------------------------------");
+//		        		} else if (!keywordDTO.getKeyword2().equals("") && value.contains(keywordDTO.getKeyword2())) {
+//		        			System.out.println("------------------------------");
+//		        			System.out.println("설정한 키워드 : " + keywordDTO.getKeyword2());
+//		        			System.out.println(value);
+//		        			System.out.println("------------------------------");
+//		        		} else if (!keywordDTO.getKeyword3().equals("") && value.contains(keywordDTO.getKeyword3())) {
+//		        			System.out.println("------------------------------");
+//		        			System.out.println("설정한 키워드 : " + keywordDTO.getKeyword3());
+//		        			System.out.println(value);
+//		        			System.out.println("------------------------------");
+//		        		}
+//		        	}
+//		        }
+			
+	        
+	        // mailDAO.updateLastMailId(messageListResponse.getBody().getMessages().get(0).getId());
+			
+		
+		
+	}
+	
+	@Override
+	public String getNewAccessToken(String refresh_token) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		
@@ -242,6 +341,11 @@ public class MailServiceImpl implements MailService {
 		mailDAO.deleteKeyword(memberId);
 		mailDAO.deleteSubscription(memberId);
 		
+	}
+
+	@Override
+	public List<MailHistoryDTO> getMailHistoryList(String memberId) throws Exception {
+		return mailDAO.selectListMailHistory(memberId);
 	}
 	
 }

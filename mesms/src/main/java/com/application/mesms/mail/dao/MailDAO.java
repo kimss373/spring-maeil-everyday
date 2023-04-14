@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.application.mesms.mail.dto.KeywordDTO;
+import com.application.mesms.mail.dto.MailHistoryDTO;
 import com.application.mesms.mail.dto.TokenWithMailDTO;
 
 public interface MailDAO {
@@ -17,5 +18,8 @@ public interface MailDAO {
 	public void deleteKeyword(String memberId) throws Exception;
 	public void deleteSubscription(String memberId) throws Exception;
 	public TokenWithMailDTO selectOneTokenWithMail(String memberId) throws Exception;
+	public void insertNewHistory(MailHistoryDTO mailHistoryDTO) throws Exception;
+	public void updateLastMailId(TokenWithMailDTO setTokenWithMailDTO) throws Exception;
+	public List<MailHistoryDTO> selectListMailHistory(String memberId) throws Exception;
 	
 }

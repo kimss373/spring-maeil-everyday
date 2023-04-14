@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.application.mesms.mail.dto.MailHistoryDTO;
 import com.application.mesms.mail.service.MailService;
 import com.application.mesms.mail.service.MailServiceImpl;
 import com.application.mesms.project.dto.PojectWorkWithProjectNmDTO;
@@ -45,16 +46,17 @@ public class MainController {
 		List<ScheduleDTO> todayScheduleList = scheduleService.getTodayScheduleList(memberId);
 		List<ScheduleDTO> tomorrowScheduleList = scheduleService.getTomorrowScheduleList(memberId);
 		List<PojectWorkWithProjectNmDTO> myProjectWorkList = projectService.getMyProjectWorkList(memberId);
-		
+		List<MailHistoryDTO> mailHistoryList = mailService.getMailHistoryList(memberId);
 		
 		mv.addObject("todayScheduleList", todayScheduleList);
 		mv.addObject("todayScheduleSize", todayScheduleList.size());
 		mv.addObject("tomorrowScheduleList", tomorrowScheduleList);
 		mv.addObject("tomorrowScheduleSize", tomorrowScheduleList.size());
 		mv.addObject("myProjectWorkList", myProjectWorkList);
+		mv.addObject("mailHistoryList", mailHistoryList);
 		mv.setViewName("/main");
 		
-		mailService.test1();
+		//mailService.test2();
 		
 		return mv;
 	}

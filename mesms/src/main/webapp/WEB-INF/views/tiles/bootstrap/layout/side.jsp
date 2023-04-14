@@ -27,24 +27,13 @@
                                 Messages
                                 <span class="badge badge-success-soft text-success ml-auto">2 New!</span>
                             </a>
-                            <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Core</div>
+                            <div class="sidenav-menu-heading">메인</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
+                            <a class="nav-link" href="${contextPath }/main">
                                 <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                                Dashboards
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                메인 페이지
                             </a>
-                            <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="#">
-                                        Default
-                                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
-                                    </a>
-                                    <a class="nav-link" href="#">Multipurpose</a>
-                                    <a class="nav-link" href="#">Affiliate</a>
-                                </nav>
-                            </div>
+
                             <!-- Sidenav Heading (App Views)-->
                             <div class="sidenav-menu-heading">그룹 서비스</div>
                             <!-- Sidenav Accordion (Pages)-->
@@ -84,29 +73,9 @@
                                 <div class="nav-link-icon"><i class="fas fa-bell"></i></div>
                                 메일 알람 서비스
                             </a>
-                            <!-- Sidenav Accordion (Utilities)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
-                                <div class="nav-link-icon"><i data-feather="tool"></i></div>
-                                Utilities
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseUtilities" data-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Animations</a>
-                                    <a class="nav-link" href="#">Background</a>
-                                    <a class="nav-link" href="#">Borders</a>
-                                    <a class="nav-link" href="#">Lift</a>
-                                    <a class="nav-link" href="#">Shadows</a>
-                                    <a class="nav-link" href="#">Typography</a>
-                                </nav>
-                            </div>
+                            
                             <!-- Sidenav Heading (Addons)-->
-                            <div class="sidenav-menu-heading">Plugins</div>
-                            <!-- Sidenav Link (Charts)-->
-                            <a class="nav-link" href="#">
-                                <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
-                                Charts
-                            </a>
+                            <div class="sidenav-menu-heading">입장</div>
                             <!-- Sidenav Link (Tables)-->
                             <a class="nav-link" href="${contextPath }/project/joinProjectOrTeam">
                                 <div class="nav-link-icon"><i data-feather="filter"></i></div>

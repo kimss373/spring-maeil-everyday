@@ -107,7 +107,7 @@
                                         <form action="${contextPath }/member/myInfo" method="post">
                                             <!-- Form Group (memberNm)-->
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputUsername">이름 (how your name will appear to other users on the site)</label>
+                                                <label class="small mb-1" for="inputUsername">이름</label>
                                                 <input class="form-control" id="inputUsername" name="memberNm" type="text" placeholder="Enter your username" value="${memberDTO.memberNm }" />
                                             </div>
                                             <!-- Form Group (memberId)-->

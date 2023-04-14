@@ -96,4 +96,34 @@
 				MEMBER_ID = #{memberId}
 	</select>
 	
+	<insert id="insertNewHistory" parameterType="MailHistoryDTO">
+		INSERT INTO
+				MAIL_HISTORY(MEMBER_ID,
+							 KEYWORD,
+							 HISTORY_DT)
+				   	 VALUES( #{memberId},
+							 #{keyword},
+							 NOW())
+	</insert>
+	
+	<update id="updateLastMailId" parameterType="TokenWithMailDTO">
+		UPDATE
+				TOKEN_WITH_MAIL
+		SET
+				LAST_MAIL_ID=#{lastMailId}
+		WHERE
+				MEMBER_ID=#{memberId}
+	</update>
+	
+	<select id="selectListMailHistory" parameterType="String" resultType="MailHistoryDTO">
+		SELECT
+				*
+		FROM
+				MAIL_HISTORY
+		WHERE
+				MEMBER_ID = #{memberId}
+		LIMIT
+				10
+	</select>
+	
 </mapper> 
