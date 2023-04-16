@@ -283,6 +283,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<PojectWorkWithProjectNmDTO> getMyProjectWorkList(String memberId) throws Exception {
 		return projectDAO.selectListMyProjectWork(memberId);
 	}
+
+	@Override
+	public void deleteSprint(long id) throws Exception {
+		projectDAO.deleteWork(id);
+		projectDAO.deleteSprint(id);
+	}
 	
 
 	

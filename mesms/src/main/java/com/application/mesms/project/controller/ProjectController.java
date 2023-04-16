@@ -322,6 +322,29 @@ public class ProjectController {
 		return "autoClose";
 	}
 	
+	@PostMapping("/deleteSprint")
+	@ResponseBody
+	public String deleteSprint(@RequestParam("id") long id, @RequestParam("projectCd") long projectCd, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String memberId =  (String)session.getAttribute("memberId");
+		
+		String jsScript = "<script>";
+		
+		if (!projectService.checkProjectMember(projectCd, memberId)) {
+			jsScript += "location.href='" + request.getContextPath() + "/main';";
+			jsScript += "</script>";
+			return jsScript;
+		}
+		
+		projectService.deleteSprint(id);
+		
+		jsScript += "location.href='" + request.getContextPath() + "/project/projectBacklog?projectCd=" + projectCd + "';";
+		jsScript += "</script>";
+		
+		return jsScript;
+	}
+	
 	@PostMapping("/changeTodoCondition")
 	@ResponseBody
 	public String changeTodoCondition(@RequestParam("id") long id, @RequestParam("todoCondition") String todoCondition, @RequestParam("projectCd") long projectCd, HttpServletRequest request) throws Exception {

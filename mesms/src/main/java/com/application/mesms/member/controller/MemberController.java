@@ -37,11 +37,6 @@ public class MemberController {
 	private final String PROFILE_IMAGE_REPO_PATH = "D:\\file_repo\\";					    // window
 	//private final String PROFILE_IMAGE_REPO_PATH = "/var/lib/tomcat9/file_repository/";  	// linux
 	
-	@GetMapping("/notYet")
-	public String notYet() {
-		return "/notYet";
-	}
-	
 	@GetMapping("/registerMember")
 	public String register() {		
 		return "non-tiles/registerMember";
@@ -145,8 +140,6 @@ public class MemberController {
 	
 	@PostMapping("/checkForFindPasswd")
 	public ResponseEntity<Object> checkForFindPasswd(@ModelAttribute MemberDTO memberDTO) throws Exception{
-		System.out.println("dd");
-		System.out.println(memberDTO);
 		return new ResponseEntity<Object>(memberService.getMemberDTO(memberDTO), HttpStatus.OK);
 	}
 	

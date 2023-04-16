@@ -83,6 +83,21 @@ public class TeamDAOImpl implements TeamDAO {
 	public void insertNewTeamLink(TeamLinkDTO teamLinkDTO) throws Exception {
 		sqlSession.insert("team.insertNewTeamLink", teamLinkDTO);
 	}
+	
+	@Override
+	public TeamLinkDTO selectOneTeamLink(long id) throws Exception {
+		return sqlSession.selectOne("team.selectOneTeamLink", id);
+	}
+	
+	@Override
+	public void updateTeamLink(TeamLinkDTO teamLinkDTO) throws Exception {
+		sqlSession.update("team.updateTeamLink", teamLinkDTO);
+	}
+	
+	@Override
+	public void deleteTeamLink(long id) throws Exception {
+		sqlSession.delete("team.deleteTeamLink", id);
+	}
 
 	@Override
 	public List<TeamBoardDTO> selectListTeamBoard(long teamCd) throws Exception {

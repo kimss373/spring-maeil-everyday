@@ -39,11 +39,31 @@
 		window.open(openUrl, 'pop', popOption);
 	}
 	
+	function modifyTeamLink(id) {
+		var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		var openUrl = "/team/modifyTeamLink?teamCd=${teamDTO.teamCd}&id=" + id;
+		window.open(openUrl, 'pop', popOption);
+	}
+	
 	function leaveTeam(){
 		
 		if (confirm("정말 탈퇴하시겠습니까??") == true){    //확인
 
 		     document.leaveform.submit();
+
+		 }else{   //취소
+
+		     return false;
+
+		 }
+		
+	}
+	
+	function deleteTeamLink(id) {
+		
+		if (confirm("링크를 삭제하시겠습니까?") == true){    //확인
+
+			 $("#deleteLink" + id).submit();
 
 		 }else{   //취소
 
@@ -205,8 +225,12 @@
 			                    </div>
 			                    <div class="ml-4 small">
 			                        <div class="badge badge-light mr-3">${teamLinkDTO.memberId }</div>
-			                        <a href="#!">수정</a>
-			                        <a href="#!">삭제</a>
+			                        <form action="${contextPath }/team/deleteTeamLink" id="deleteLink${teamLinkDTO.id }" method="post">
+			                        <a href="#!" onclick="modifyTeamLink(${teamLinkDTO.id})">수정</a>
+			                        <a href="#!" onclick="deleteTeamLink(${teamLinkDTO.id})">삭제</a>
+			                        <input type="hidden" name="teamCd" value="${teamLinkDTO.teamCd }">
+                                	<input type="hidden" name="id" value="${teamLinkDTO.id }">
+			                        </form>
 			                    </div>
 			                </div>
 			                <hr />

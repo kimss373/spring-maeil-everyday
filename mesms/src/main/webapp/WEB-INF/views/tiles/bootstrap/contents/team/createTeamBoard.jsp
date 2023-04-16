@@ -58,36 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-	            <div class="nav-sticky">
-	                <div class="card">
-	                    <div class="card-body">
-	                        <ul class="nav flex-column" id="stickyNav">
-	                            <li class="nav-item"><a class="nav-link" href="#default">Default Form Controls</a></li>
-	                            <li class="nav-item"><a class="nav-link" href="#solid">Solid Form Controls</a></li>
-	                            <li class="nav-item"><a class="nav-link" href="#checkbox">Default Checkboxes &amp; Radio</a></li>
-	                            <li class="nav-item"><a class="nav-link" href="#checkboxSolid">Solid Checkboxes &amp; Radio</a></li>
-	                            <li class="nav-item">
-	                                <a class="nav-link" href="#inputGroupJoined">
-	                                    <div class="d-flex align-items-center justify-content-between">
-	                                        Input Groups
-	                                        <span class="badge badge-primary-soft text-primary">New</span>
-	                                    </div>
-	                                </a>
-	                            </li>
-	                            <li class="nav-item">
-	                                <a class="nav-link" href="#dateRangePicker">
-	                                    <div class="d-flex align-items-center justify-content-between">
-	                                        Date Range Picker
-	                                        <span class="badge badge-primary-soft text-primary">New</span>
-	                                    </div>
-	                                </a>
-	                            </li>
-	                        </ul>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
+            
         </div>
     </div>
 </main>

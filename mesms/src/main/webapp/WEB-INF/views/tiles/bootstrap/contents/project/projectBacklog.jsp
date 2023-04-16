@@ -29,10 +29,24 @@
 		
 	}
 	
-	function modifySprint(id) {
+	function modifySprint1(id) {
 		var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
 		var openUrl = "/project/modifySprint?id=" + id + "&projectCd=${projectDTO.projectCd }";
 		window.open(openUrl, 'pop', popOption);
+	}
+	
+	function deleteSprint1(id) {
+		
+		if (confirm("스프린트를 삭제하시겠습니까?") == true){    //확인
+
+			 $("#deleteSprint" + id).submit();
+
+		 }else{   //취소
+
+		     return false;
+
+		 }
+		
 	}
 	
 </script>
@@ -135,7 +149,12 @@
 							                     <div class="card-header">
 							                          ${projectSprintDTO.num } ${projectSprintDTO.sprintNm }
 							                         <div>
-							                             <button class="btn btn-sm btn-primary" id="modifySprint" type="button" onclick="modifySprint(${projectSprintDTO.id })">스프린트 수정</button>
+							                         	 <form action="/project/deleteSprint" id="deleteSprint${projectSprintDTO.id }" method="post">
+							                         	 	<input type="hidden" name="id" value="${projectSprintDTO.id }">
+							                         	 	<input type="hidden" name="projectCd" value="${projectSprintDTO.projectCd }">
+							                             	<button class="btn btn-sm btn-primary" type="button" onclick="deleteSprint1(${projectSprintDTO.id });">스프린트 삭제</button>
+							                             <button class="btn btn-sm btn-primary" id="modifySprint" type="button" onclick="modifySprint1(${projectSprintDTO.id })">스프린트 수정</button>
+							                             </form>
 							                         </div>
 							                     </div>
 							                     <div class="card-body">
@@ -188,7 +207,12 @@
 					                     <div class="card-header">
 					                          ${projectSprintDTO.num } ${projectSprintDTO.sprintNm }
 					                         <div>
-					                             <button class="btn btn-sm btn-primary" id="modifySprint" type="button" onclick="modifySprint(${projectSprintDTO.id })">스프린트 수정</button>
+					                         			<form action="/project/deleteSprint" id="deleteSprint${projectSprintDTO.id }" method="post">
+							                         	 	<input type="hidden" name="id" value="${projectSprintDTO.id }">
+							                         	 	<input type="hidden" name="projectCd" value="${projectSprintDTO.projectCd }">
+							                             	<button class="btn btn-sm btn-primary" type="button" onclick="deleteSprint1(${projectSprintDTO.id });">스프린트 삭제</button>
+							                             <button class="btn btn-sm btn-primary" id="modifySprint" type="button" onclick="modifySprint1(${projectSprintDTO.id })">스프린트 수정</button>
+							                             </form>
 					                         </div>
 					                     </div>
 					                     <div class="card-body">

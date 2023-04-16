@@ -24,6 +24,9 @@ public interface TeamDAO {
 	public void deleteTeamMember(TeamMemberDTO teamMemberDTO) throws Exception;
 	public List<TeamLinkDTO> selectListTeamLink(long teamCd) throws Exception;
 	public void insertNewTeamLink(TeamLinkDTO teamLinkDTO) throws Exception;
+	public TeamLinkDTO selectOneTeamLink(long id) throws Exception;
+	public void updateTeamLink(TeamLinkDTO teamLinkDTO) throws Exception;
+	public void deleteTeamLink(long id) throws Exception;
 	public List<TeamBoardDTO> selectListTeamBoard(long teamCd) throws Exception;
 	public void insertNewTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception;
 	public void updateTeamBoardReadCnt(long id) throws Exception;

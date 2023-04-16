@@ -132,6 +132,21 @@ public class TeamServiceImpl implements TeamService {
 	public void createTeamLink(TeamLinkDTO teamLinkDTO) throws Exception {
 		teamDAO.insertNewTeamLink(teamLinkDTO);
 	}
+	
+	@Override
+	public TeamLinkDTO getTeamLinkDTO(long id) throws Exception {
+		return teamDAO.selectOneTeamLink(id);
+	}
+	
+	@Override
+	public void modifyTeamLink(TeamLinkDTO teamLinkDTO) throws Exception {
+		teamDAO.updateTeamLink(teamLinkDTO);
+	}
+	
+	@Override
+	public void deleteTeamLink(long id) throws Exception {
+		teamDAO.deleteTeamLink(id);
+	}
 
 	@Override
 	public List<TeamBoardDTO> getTeamBoardList(long teamCd) throws Exception {

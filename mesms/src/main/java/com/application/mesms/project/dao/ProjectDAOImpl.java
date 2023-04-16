@@ -144,5 +144,15 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return sqlSession.selectList("project.selectListMyProjectWork", memberId);
 	}
 
+	@Override
+	public void deleteWork(long id) throws Exception {
+		sqlSession.delete("project.deleteWork", id);
+	}
+
+	@Override
+	public void deleteSprint(long id) throws Exception {
+		sqlSession.delete("project.deleteSprint", id);
+	}
+
 	
 }

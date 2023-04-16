@@ -29,6 +29,14 @@
 		
 	}
 	
+	function modifyBacklog(id){
+		
+		var popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		var openUrl = "/project/modifyBacklog?id=" + id + "&projectCd=${projectDTO.projectCd }";
+		window.open(openUrl, 'pop', popOption);
+		
+	}
+	
 </script>
 </head>
 <body>
@@ -51,7 +59,7 @@
                     <div class="container mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link" href="${contextPath }/project/projectBacklog?projectCd=${projectDTO.projectCd }">백로그</a>
+                            <a class="nav-link" href="${contextPath }/project/projectBacklog?projectCd=${projectDTO.projectCd }">업무 생성&지정</a>
                             <a class="nav-link active" href="${contextPath }/project/projectMain?projectCd=${projectDTO.projectCd }">보드</a>
                             <a class="nav-link" href="${contextPath }/project/chart?projectCd=${projectDTO.projectCd }">그래프</a>
                             <a class="nav-link ml-0" href="${contextPath }/project/projectSetting?projectCd=${projectDTO.projectCd }">프로젝트 설정</a>
@@ -74,7 +82,7 @@
 										            <span aria-hidden="true">×</span>
 										        </button>
 										    </div>
-										    <div class="toast-body"><a href="">상세보기</a><br>
+										    <div class="toast-body"><a href="#" onclick="modifyBacklog(${todoDTO.id})">상세보기</a><br>
 										     <button class="btn btn-primary" type="button" onclick="changeTodoCondition(${todoDTO.id}, 'TODO')">TODO</button>
 										     <button class="btn btn-primary" type="button" onclick="changeTodoCondition(${todoDTO.id}, 'inProgress')">inProgress</button>
 										     <button class="btn btn-primary" type="button" onclick="changeTodoCondition(${todoDTO.id}, 'Done')">Done</button></div>

@@ -111,7 +111,7 @@ public class TeamController {
 	}
 	
 	@GetMapping("/showParticipationCd")
-	public ModelAndView modifySprint(@RequestParam("teamCd") Long teamCd, HttpServletRequest request) throws Exception{
+	public ModelAndView showParticipationCd(@RequestParam("teamCd") Long teamCd, HttpServletRequest request) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -266,6 +266,65 @@ public class TeamController {
 		teamService.createTeamLink(teamLinkDTO);
 		
 		return "autoClose";
+	}
+	
+	@GetMapping("/modifyTeamLink")
+	public ModelAndView modifyTeamLink(@RequestParam("teamCd") long teamCd, @RequestParam("id") long id, HttpServletRequest request) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String memberId =  (String)session.getAttribute("memberId");
+		
+		if (!teamService.checkTeamMember(teamCd, memberId)) {
+			mv.setViewName("/main");
+			return mv;
+		}
+		
+		TeamLinkDTO teamLinkDTO = teamService.getTeamLinkDTO(id);
+		mv.setViewName("/team/modifyTeamLink");
+		mv.addObject("teamLinkDTO", teamLinkDTO);
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("/modifyTeamLink")
+	public String modifyTeamLink(@ModelAttribute TeamLinkDTO teamLinkDTO, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String memberId =  (String)session.getAttribute("memberId");
+		
+		if (!teamService.checkTeamMember(teamLinkDTO.getTeamCd(), memberId)) {
+			return "/main";
+		}
+		
+		teamService.modifyTeamLink(teamLinkDTO);
+		
+		return "autoClose";
+	}
+	
+	@PostMapping("/deleteTeamLink")
+	@ResponseBody
+	public String deleteTeamLink(@RequestParam("id") long id, @RequestParam("teamCd") long teamCd, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String memberId =  (String)session.getAttribute("memberId");
+		
+		String jsScript = "<script>";
+		
+		if (!teamService.checkTeamMember(teamCd, memberId)) {
+			jsScript += "location.href='" + request.getContextPath() + "/main';";
+			jsScript += "</script>";
+			return jsScript;
+		}
+		
+		teamService.deleteTeamLink(id);
+		
+		jsScript += "location.href='" + request.getContextPath() + "/team/teamMain?teamCd=" + teamCd + "';";
+		jsScript += "</script>";
+		
+		return jsScript;
 	}
 	
 	@GetMapping("/teamBoard")

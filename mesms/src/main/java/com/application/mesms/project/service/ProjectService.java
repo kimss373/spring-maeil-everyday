@@ -31,5 +31,6 @@ public interface ProjectService {
 	public List<Object> getChartList(long projectCd) throws Exception;
 	public void modifyProjectSetting(ProjectDTO projectDTO) throws Exception;
 	public List<PojectWorkWithProjectNmDTO> getMyProjectWorkList(String memberId) throws Exception;
+	public void deleteSprint(long id) throws Exception;
 	
 }

@@ -35,7 +35,7 @@
     </div>
 </header>
 <nav class="nav nav-borders">
-	<a class="nav-link" href="${contextPath }/project/projectBacklog?projectCd=${projectDTO.projectCd }">백로그</a>
+	<a class="nav-link" href="${contextPath }/project/projectBacklog?projectCd=${projectDTO.projectCd }">업무 생성&지정</a>
 	<a class="nav-link" href="${contextPath }/project/projectMain?projectCd=${projectDTO.projectCd }">보드</a>
 	<a class="nav-link active" href="${contextPath }/project/chart?projectCd=${projectDTO.projectCd }">그래프</a>
 	<a class="nav-link ml-0" href="${contextPath }/project/projectSetting?projectCd=${projectDTO.projectCd }">프로젝트 설정</a>

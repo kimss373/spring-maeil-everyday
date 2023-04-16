@@ -21,6 +21,9 @@ public interface TeamService {
 	public boolean leaveTeam(long teamCd, String memberId) throws Exception;
 	public List<TeamLinkDTO> getTeamLinkList(long teamCd) throws Exception;
 	public void createTeamLink(TeamLinkDTO teamLinkDTO) throws Exception;
+	public TeamLinkDTO getTeamLinkDTO(long id) throws Exception;
+	public void modifyTeamLink(TeamLinkDTO teamLinkDTO) throws Exception;
+	public void deleteTeamLink(long id) throws Exception;
 	public List<TeamBoardDTO> getTeamBoardList(long teamCd) throws Exception;
 	public int createTeamBoard(TeamBoardDTO teamBoardDTO) throws Exception;
 	public TeamBoardDTO getTeamBoardDetail(long id, boolean isReadCntUp) throws Exception;

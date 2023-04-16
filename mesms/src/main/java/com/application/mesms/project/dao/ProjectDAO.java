@@ -36,5 +36,7 @@ public interface ProjectDAO {
 	public void updateTodoCondition(ProjectWorkDTO projectWorkDTO) throws Exception;
 	public void updateProjectSetting(ProjectDTO projectDTO) throws Exception;
 	public List<PojectWorkWithProjectNmDTO> selectListMyProjectWork(String memberId) throws Exception;
+	public void deleteWork(long id) throws Exception;
+	public void deleteSprint(long id) throws Exception;
 	
 }

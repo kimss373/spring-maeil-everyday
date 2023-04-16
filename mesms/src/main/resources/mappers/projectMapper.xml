@@ -259,4 +259,18 @@
 				RESPONSIBILITY=#{memberId}
 	</select>
 	
+	<delete id="deleteWork" parameterType="long">
+		DELETE FROM
+				PROJECT_WORK
+		WHERE
+				PROJECT_SPRINT_ID = #{id}
+	</delete>
+	
+	<delete id="deleteSprint" parameterType="long">
+		DELETE FROM
+				PROJECT_SPRINT
+		WHERE
+				ID = #{id}
+	</delete>
+	
 </mapper> 

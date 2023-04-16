@@ -139,6 +139,32 @@
 						#{content})
 	</insert>
 	
+	<select id="selectOneTeamLink" parameterType="long" resultType="TeamLinkDTO">
+		SELECT
+				*
+		FROM
+				TEAM_LINK
+		WHERE
+				ID = #{id}
+	</select>
+	
+	<update id="updateTeamLink" parameterType="TeamLinkDTO">
+		UPDATE
+				TEAM_LINK
+		SET
+				LINK=#{link},
+				CONTENT=#{content}
+		WHERE
+				ID=#{id}
+	</update>
+	
+	<delete id="deleteTeamLink" parameterType="long">
+		DELETE FROM
+				TEAM_LINK
+		WHERE
+				ID=#{id}
+	</delete>
+	
 	<select id="selectListTeamBoard" parameterType="long" resultType="TeamBoardDTO">
 		SELECT
 				*
