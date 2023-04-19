@@ -36,6 +36,7 @@
 		          if (data == null){
 					  alert("존재하지 않는 아이디 입니다.");
 					  flag = false;
+					  console.log(flag);
 		          }
 		          else {
 		          	  flag = true;

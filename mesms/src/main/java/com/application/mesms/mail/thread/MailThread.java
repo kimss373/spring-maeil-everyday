@@ -45,7 +45,6 @@ public class MailThread extends Thread{
 	
 	@Override
 	public void run(){
-		
 		RestTemplate restTemplate = new RestTemplate();
 		
 		for (TokenWithMailDTO tokenWithMailDTO : tokenWithMailList) {
@@ -65,7 +64,9 @@ public class MailThread extends Thread{
 			headers.add("Authorization", "Bearer " + access_token);
 			
 			HttpEntity entity = new HttpEntity(headers);
+
 	        ResponseEntity<MessageListDTO> messageListResponse = restTemplate.exchange(messageListUrl, HttpMethod.GET, entity, MessageListDTO.class);
+
 	        KeywordDTO keywordDTO= null;
 	        try {
 				keywordDTO = getKeywordDTO(tokenWithMailDTO.getMemberId());
@@ -151,9 +152,9 @@ public class MailThread extends Thread{
         map.add("redirect_uri", "http://localhost:8080/mailAlarmService/getToken");
 
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
-        
+
         ResponseEntity<TokenDTO> tokenResponse = restTemplate.exchange(url, HttpMethod.POST, entity, TokenDTO.class);
-        
+
 		return tokenResponse.getBody().getAccess_token();
 		
 	}

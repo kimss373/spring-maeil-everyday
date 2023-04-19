@@ -17,6 +17,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -201,7 +202,8 @@ public class MailServiceImpl implements MailService {
 	}
 	
 	@Override
-	public void test2() throws Exception {
+	@Scheduled(cron = "0 0 0/1 * * *")
+	public void mailAlarmScheduled() throws Exception {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -335,8 +337,6 @@ public class MailServiceImpl implements MailService {
         
         restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         
-        System.out.println("성공");
-		
 		memberDAO.updateMeSubscriptionN(memberId);
 		mailDAO.deleteKeyword(memberId);
 		mailDAO.deleteSubscription(memberId);

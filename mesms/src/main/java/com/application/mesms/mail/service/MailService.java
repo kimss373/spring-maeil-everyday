@@ -12,7 +12,7 @@ public interface MailService {
 	public boolean validateMember(String memberId) throws Exception;
 	public MessageDTO getLastMessage(String access_token, String emailAddress) throws Exception;
 	public void test1() throws Exception; // googleMailSearch
-	public void test2() throws Exception;
+	public void mailAlarmScheduled() throws Exception;
 	public String getNewAccessToken(String refresh_token);
 	public KeywordDTO getKeywordDTO(String memberId) throws Exception;
 	public void modifyKeyword(String keyword, int where, String memberId) throws Exception;

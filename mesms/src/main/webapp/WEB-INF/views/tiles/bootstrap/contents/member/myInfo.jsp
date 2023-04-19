@@ -6,7 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${contextPath }/resources/jquery-3.6.1.min.js"></script>
 <script>
+
+function cliForm(){
+	console.log("sd");
+	var canSubmit = true;
+	
+	var num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+	
+	var hp = document.getElementById("hpdd").value;
+	
+	for (var i=0 ; i<hp.length ; i++) {
+		if (!(hp.charAt(i) in num)){
+			alert("연락처를 양식에 맞게 입력하세요");
+			canSubmit = false;
+			break;
+		}
+	}
+	
+	if (canSubmit){ 
+
+	     document.myinfoForm.submit();
+
+	 }else{ 
+
+	     return false;
+
+	 }
+	
+}
 
 	function fileUploadCheck(fileVal){
 		
@@ -35,28 +64,6 @@
 			
 		}
 	}
-	
-	$().ready(function() {
-		
-		$("form").submit(function(){
-			
-			var num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-			
-			var hp = $("#hp").val();
-			
-			
-			for (var i=0 ; i<hp.length ; i++) {
-				if (!(hp.charAt(i) in num)){
-					alert("연락처를 양식에 맞게 입력하세요");
-					$("#hp").focus();
-					return false;
-				}
-			}
-			
-		});
-			
-		
-	});
 	
 	
 </script>
@@ -104,7 +111,7 @@
                                 <div class="card mb-4">
                                     <div class="card-header">Account Details</div>
                                     <div class="card-body">
-                                        <form action="${contextPath }/member/myInfo" method="post">
+                                        <form action="${contextPath }/member/myInfo" method="post" name="myinfoForm">
                                             <!-- Form Group (memberNm)-->
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputUsername">이름</label>
@@ -125,7 +132,7 @@
                                                 <!-- Form Group (location)-->
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputLocation">연락처</label>
-                                                    <input class="form-control" id="inputLocation" name="hp" type="text" placeholder="Enter your location" value="${memberDTO.hp }"/>
+                                                    <input class="form-control" id="hpdd" name="hp" type="text" placeholder="Enter your location" value="${memberDTO.hp }"/>
                                                 </div>
                                             </div>
                                             <!-- Form Group (email address)-->
@@ -148,7 +155,7 @@
 		                                            <a href="${contextPath}/setNewPasswd"><button type="button" class="btn btn-primary">비밀번호 변경하기</button></a>
                                                 </div>
                                                 <div class="form-group col-md-6">
-		                                            <button class="btn btn-primary" type="submit">저장하기</button>
+		                                            <button class="btn btn-primary" type="button" onclick="cliForm()">저장하기</button>
                                                 </div>
                                             </div>
                                         </form>

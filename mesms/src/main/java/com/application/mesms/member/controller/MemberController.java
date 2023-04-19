@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.server.MethodNotAllowedException;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.mesms.member.dto.MemberDTO;
@@ -158,6 +159,14 @@ public class MemberController {
 	public ResponseEntity<Object> setNewPasswd(@ModelAttribute MemberDTO memberDTO, HttpServletRequest request) throws Exception {
 		
 		String message = "";
+		HttpSession session = request.getSession();
+		String memberId = (String) session.getAttribute("memberId");
+		
+		if (!memberId.equals(memberDTO.getMemberId())) {
+			throw new Exception();
+		}
+		
+		memberDTO.setMemberId(memberId);
 		
 		memberService.setNewPasswd(memberDTO);
 		
